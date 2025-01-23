@@ -3,25 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "cross-env NODE_ENV_PLATFORM=window next dev --experimental-https --turbopack",
+    "dev:p": "cross-env NODE_ENV_PLATFORM=window next dev -p 3001 --experimental-https --turbopack",
+    "build": "cross-env ANALYZE=true next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src --fix --ext .ts,.tsx,.js,.jsx --max-warnings 0"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "antd": "^5.23.2",
+    "immer": "^10.1.1",
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "sass": "^1.83.4",
+    "styled-components": "^6.1.14",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/config-conventional": "^19.0.3",
+    "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "npm run lint",
+      "prettier --write"
+    ]
   }
 }
