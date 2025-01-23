@@ -2,3 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx --no-install lint-staged
+# npx eslint src --fix --max-warnings 0

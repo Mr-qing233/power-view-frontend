@@ -1,9 +1,12 @@
 'use client';
 
-import style from './page.module.scss';
-import useUserStore from '@/store/user';
 import React from 'react';
+
 import { Button } from 'antd';
+
+// import style from './page.module.scss';
+
+import useUserStore from '@/store/user';
 
 const Info = () => {
   const { userInfo, token, updateUserInfo, updateAge, updateToken } = useUserStore();

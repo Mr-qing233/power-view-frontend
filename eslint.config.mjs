@@ -1,7 +1,8 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import exp from "constants";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,6 +23,7 @@ const eslintConfig = [
     files: ['**/*.{js,jsx,ts,tsx}'],
     ignores: ['node_modules/**'],
     languageOptions: {
+      ...reactPlugin.configs.recommended.languageOptions,
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
@@ -31,9 +33,12 @@ const eslintConfig = [
       },
     },
     plugins: {
-      prettier: 'eslint-plugin-prettier',
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
     },
     rules: {
+      ...reactPlugin.configs.recommended.rules,
+      'react/react-in-jsx-scope': 0,
       '@typescript-eslint/no-explicit-any': 'off', // 允许使用 any
       '@typescript-eslint/ban-ts-comment': 'off', // 允许使用 @ts-ignore
       '@typescript-eslint/no-non-null-assertion': 'off', // 允许使用非空断言
