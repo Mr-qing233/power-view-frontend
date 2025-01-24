@@ -1,15 +1,12 @@
-import { AntdRegistry } from '@ant-design/nextjs-registry';
+import '@/styles/globals.css';
 
-import StyledComponentsRegistry from '@/lib/registry';
-
-const RootLayout = ({ children }: React.PropsWithChildren) => (
-  <html lang="en">
-    <body>
-      <StyledComponentsRegistry>
-        <AntdRegistry>{children}</AntdRegistry>
-      </StyledComponentsRegistry>
-    </body>
-  </html>
-);
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <html lang="en">
+      {/* 使用suppressHydrationWarning={true} 抑制水合报错 */}
+      <body>{children}</body>
+    </html>
+  );
+};
 
 export default RootLayout;

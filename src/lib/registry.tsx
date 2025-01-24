@@ -7,7 +7,7 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 import '@ant-design/v5-patch-for-react-19';
 
-export default function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
+const StyledComponentsRegistry = ({ children }: { children: React.ReactNode }) => {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
@@ -21,4 +21,6 @@ export default function StyledComponentsRegistry({ children }: { children: React
   if (typeof window !== 'undefined') return <>{children}</>;
 
   return <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>{children}</StyleSheetManager>;
-}
+};
+
+export default StyledComponentsRegistry;

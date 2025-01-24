@@ -10,6 +10,7 @@
     "lint": "eslint src --fix --max-warnings 0"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.6.0",
     "@ant-design/nextjs-registry": "^1.0.2",
     "antd": "^5.23.2",
     "immer": "^10.1.1",
