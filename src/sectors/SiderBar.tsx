@@ -1,16 +1,20 @@
 'use client';
 
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 
+import { useSiderStore } from '@/store/sider';
+
 const SiderBar: React.FC = () => {
+  const { isOpen, toggleSider } = useSiderStore();
+
   return (
     <Sider
       trigger={null}
       collapsible
-      // collapsed={props.collapsed}
-      // onCollapse={(value) => props.setCollapsed(value)}
-      className="overflow-y-hidden top-0 left-0 bottom-0 flex flex-col text-center text-white !bg-[#1677ff]"
+      collapsed={isOpen}
+      className="overflow-y-hidden top-0 left-0 bottom-0 flex flex-col text-center text-white !bg-[#1677ff] h-100vh"
       style={{
         position: 'fixed',
         transition: 'min-width 0.2s,max-width 0.2s,background 0.3s',
@@ -20,8 +24,8 @@ const SiderBar: React.FC = () => {
       <div className="h-10" />
       <Button
         type="text"
-        // icon={props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        // onClick={() => props.setCollapsed(!props.collapsed)}
+        icon={isOpen ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={() => toggleSider()}
         style={{
           fontSize: '16px',
           width: 64,

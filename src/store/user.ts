@@ -9,7 +9,7 @@ interface UserInfo {
 interface UserState {
   userInfo: UserInfo;
   token: string;
-  updateUserInfo: (parmas: UserInfo) => void;
+  updateUserInfo: (params: UserInfo) => void;
   updateAge: (params: number) => void;
   updateToken: (params: string) => void;
 }
@@ -26,6 +26,7 @@ const useUserStore = create<UserState>((set) => ({
   //更新对象中某个属性
   updateAge: (age) =>
     set(
+      //  使用immer库，可以避免直接修改state
       produce((state) => {
         state.userInfo.age = age;
       }),
