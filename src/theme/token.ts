@@ -22,7 +22,8 @@ export const darkTheme: ThemeConfig = {
     colorPrimary: '#3f89f1',
     colorInfo: '#3f89f1',
     wireframe: false,
-    // 其他自定义 token
+    colorBgBase: '#1f1f25',
+    colorBgLayout: '#262630',
   },
   components: {
     Button: {

@@ -14,7 +14,7 @@ const SiderBar: React.FC = () => {
       trigger={null}
       collapsible
       collapsed={isOpen}
-      className="overflow-y-hidden top-0 left-0 bottom-0 flex flex-col text-center text-white !bg-[#1677ff] h-100vh"
+      className="overflow-y-hidden top-0 left-0 bottom-0 flex flex-col text-center text-white h-100vh"
       style={{
         position: 'fixed',
         transition: 'min-width 0.2s,max-width 0.2s,background 0.3s',
