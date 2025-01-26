@@ -1,5 +1,5 @@
-import type { NextConfig } from 'next';
 import bundleAnalyzer from '@next/bundle-analyzer';
+import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true', //当环境变量ANALYZE为true时开启
@@ -8,7 +8,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   /* config options here */
   sassOptions: {
-    additionalData: '@import "@/styles/index.scss";',
+    additionalData: '@use "@/styles/globals.scss" as *;',
   },
   compiler: {
     styledComponents: true,

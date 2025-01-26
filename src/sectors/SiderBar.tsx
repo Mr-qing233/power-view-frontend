@@ -21,7 +21,7 @@ const SiderBar: React.FC = () => {
         zIndex: '100',
       }}
     >
-      <div className="flex flex-col h-100vh text-center">
+      <div className="flex h-100vh text-center" style={{ flexDirection: 'column' }}>
         <div className="h-10 bg-slate-500 w-10" />
         <div className="">
           <Button
@@ -36,7 +36,7 @@ const SiderBar: React.FC = () => {
           />
         </div>
         <div className="grow"></div>
-        <div className="h-10 flex flex-col items-center">
+        <div className="h-10 flex flex-col items-center" style={{ flexDirection: 'column' }}>
           <div className="">11</div>
           <div className="">11</div>
           <div className="">11</div>

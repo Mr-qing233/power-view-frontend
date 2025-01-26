@@ -1,0 +1,6 @@
+$sider-width: 20rem;
+$header-heigh: 4rem;
+
+@function px2rem($px) {
+  @return ($px / 16) * 1rem;
+}

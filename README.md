@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Known Issues
 
-## Getting Started
+### Style System
 
-First, run the development server:
+- Tailwind CSS 与 Ant Design 组件样式存在优先级冲突
+- 项目同时使用了 SCSS 和 Tailwind，需要更清晰的样式管理策略
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Layout
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Header 和 Sider 组件的固定定位实现方式不统一
+- 布局组件之间的间距和层级关系需要优化
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Sass 使用了即将在 Dart Sass 3.0.0 中移除的 @import 语法
+- 需要更新到新的 @use 语法规范
 
-## Learn More
+### Development Guidelines Needed
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 缺少统一的样式编写规范
+- 需要明确 Tailwind、SCSS 和 Ant Design 样式的使用边界
+- 组件样式命名规范待完善
