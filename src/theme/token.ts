@@ -5,14 +5,20 @@ export const lightTheme: ThemeConfig = {
     colorPrimary: '#3f89f1',
     colorInfo: '#3f89f1',
     wireframe: false,
+    colorBgBase: '#ffffff',
+    colorWarning: '#f6c20a',
+    colorSuccess: '#0ac907',
+    colorError: '#ff0000',
+    borderRadius: 9,
+    fontFamily: 'MiSans',
     // 其他自定义 token
   },
   components: {
-    Button: {
-      // 按钮相关的 token
-    },
-    Input: {
-      // 输入框相关的 token
+    Layout: {
+      algorithm: true,
+      siderBg: '#ffffff',
+      headerBg: '#f1f1f1',
+      headerPadding: '0',
     },
   },
 };
@@ -26,11 +32,8 @@ export const darkTheme: ThemeConfig = {
     colorBgLayout: '#262630',
   },
   components: {
-    Button: {
-      // 按钮相关的 token
-    },
-    Input: {
-      // 输入框相关的 token
+    Layout: {
+      algorithm: true,
     },
   },
 };

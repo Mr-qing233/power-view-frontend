@@ -13,15 +13,13 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
         minHeight: '100vh',
       }}
     >
-      <div className="">
+      <div className="hidden lg:block">
         <SiderBar />
       </div>
-      <Layout className="ml-0 lg:ml-20 h-100vh ">
-        <div className="">
-          <HeaderBar />
-        </div>
+      <Layout className="ml-0 lg:ml-20 min-h-100">
+        <HeaderBar />
         <Layout>
-          <Content className="">{children}</Content>
+          <Content className="h-100vh">{children}</Content>
           <Footer className="text-center">XuBei Studio ©2025</Footer>
         </Layout>
       </Layout>
