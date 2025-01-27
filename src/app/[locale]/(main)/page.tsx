@@ -1,3 +1,4 @@
+'use client';
 const Home = () => {
   return (
     <div className="flex flex-row w-60 h-60 bg-red-400">

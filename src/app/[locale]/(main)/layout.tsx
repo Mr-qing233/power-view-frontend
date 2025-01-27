@@ -5,9 +5,8 @@ import { Content, Footer } from 'antd/es/layout/layout';
 
 import HeaderBar from '@/sectors/Header';
 import SiderBar from '@/sectors/SiderBar';
-import styles from '@/styles/index.module.scss';
 
-const RootLayout = ({ children }: React.PropsWithChildren) => {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout
       style={{
@@ -20,17 +19,24 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
         <SiderBar />
       </div>
       {/* <Layout className="ml-0 lg:ml-20 min-h-100 "> */}
-      <Layout className="min-h-100 ">
-        <div className={styles.header}>
-          <HeaderBar />
-        </div>
-        <Layout>
-          <Content className="h-100vh">{children}</Content>
-          <Footer className="text-center">XuBei Studio ©2025</Footer>
+      <Layout className="min-h-100">
+        <HeaderBar />
+        <Layout
+          style={{
+            height: 'calc(100vh - 64px)',
+            overflow: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Content style={{ flex: '1 0 auto' }}>{children}</Content>
+          <Footer className="text-center" style={{ flexShrink: 0 }}>
+            GinWine Studio ©2025
+          </Footer>
         </Layout>
       </Layout>
     </Layout>
   );
 };
 
-export default RootLayout;
+export default MainLayout;

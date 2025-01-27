@@ -1,29 +1,15 @@
-'use client';
-
-import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { ConfigProvider } from 'antd';
-
-import StyledComponentsRegistry from '@/lib/registry';
-import { useThemeStore } from '@/store/theme';
-import { darkTheme, lightTheme } from '@/theme/token';
-
-import '@/app/globals.css';
-
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isDarkMode } = useThemeStore();
-
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  // 等待参数
+  const { locale } = await params;
   return (
-    <html lang="en">
-      {/* 使用suppressHydrationWarning={true} 抑制水合报错 */}
-      <body>
-        <StyledComponentsRegistry>
-          <AntdRegistry>
-            <ConfigProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ConfigProvider>
-          </AntdRegistry>
-        </StyledComponentsRegistry>
-      </body>
+    <html lang={locale}>
+      <body>{children}</body>
     </html>
   );
-};
-
-export default RootLayout;
+}

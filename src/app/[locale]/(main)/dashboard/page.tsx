@@ -1,14 +1,12 @@
 'use client';
 
-import React from 'react';
-
 import { Button } from 'antd';
 
 // import style from './page.module.scss';
 
 import useUserStore from '@/store/user';
 
-const Info = () => {
+const Dashboard = () => {
   const { userInfo, token, updateUserInfo, updateAge, updateToken } = useUserStore();
 
   return (
@@ -27,4 +25,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default Dashboard;

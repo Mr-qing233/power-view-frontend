@@ -20,7 +20,13 @@ const eslintConfig = [
   ),
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    ignores: ['node_modules/**'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      '.next/**',
+      'build/**',
+      'src/i18n/locales/**',  // 显式忽略所有JSON文件
+    ],
     languageOptions: {
       ...reactPlugin.configs.recommended.languageOptions,
       parserOptions: {
@@ -35,6 +41,7 @@ const eslintConfig = [
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
     },
+
     rules: {
       ...reactPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 0,
@@ -84,7 +91,7 @@ const eslintConfig = [
             "order": "asc",
             "caseInsensitive": true
           }
-        }
+        },
       ]
     },
   }

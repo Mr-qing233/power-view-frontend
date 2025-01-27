@@ -34,6 +34,7 @@ export const darkTheme: ThemeConfig = {
   components: {
     Layout: {
       algorithm: true,
+      headerPadding: '0',
     },
   },
 };

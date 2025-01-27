@@ -6,7 +6,7 @@ import Sider from 'antd/es/layout/Sider';
 
 import { useSiderStore } from '@/store/sider';
 
-const SiderBar: React.FC = () => {
+const SiderBar = () => {
   const { isOpen, toggleSider } = useSiderStore();
 
   return (
