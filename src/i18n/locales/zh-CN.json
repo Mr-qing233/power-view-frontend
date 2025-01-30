@@ -2,6 +2,10 @@
   "Header": {
     "dashboard": "仪表盘",
     "test": "测试",
-    "reports": "报告"
+    "reports": "报告",
+    "disabled": "禁用"
+  },
+  "Common": {
+    "login": "登录"
   }
 }

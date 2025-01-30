@@ -4,11 +4,12 @@ import { create } from 'zustand';
 interface UserInfo {
   name: string;
   age: number;
+  state: boolean;
 }
 
 interface UserState {
-  userInfo: UserInfo;
-  token: string;
+  userInfo: UserInfo | null;
+  token: string | null;
   updateUserInfo: (params: UserInfo) => void;
   updateAge: (params: number) => void;
   updateToken: (params: string) => void;
@@ -16,11 +17,8 @@ interface UserState {
 
 // 创建状态存储
 const useUserStore = create<UserState>((set) => ({
-  userInfo: {
-    name: 'zhangsan',
-    age: 23,
-  },
-  token: 'S1',
+  userInfo: null,
+  token: null,
   //更新整个对象
   updateUserInfo: (userInfo) => set({ userInfo }), //合并userInfo
   //更新对象中某个属性

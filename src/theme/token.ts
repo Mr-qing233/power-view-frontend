@@ -20,21 +20,22 @@ export const lightTheme: ThemeConfig = {
       headerBg: '#f1f1f1',
       headerPadding: '0',
     },
+    Menu: {
+      colorBgContainer: '#f1f1f1',
+      itemMarginInline: 16,
+    },
   },
 };
 
 export const darkTheme: ThemeConfig = {
-  token: {
-    colorPrimary: '#3f89f1',
-    colorInfo: '#3f89f1',
-    wireframe: false,
-    colorBgBase: '#1f1f25',
-    colorBgLayout: '#262630',
-  },
+  token: {},
   components: {
     Layout: {
       algorithm: true,
       headerPadding: '0',
+    },
+    Menu: {
+      itemMarginInline: 16,
     },
   },
 };

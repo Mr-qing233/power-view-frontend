@@ -1,0 +1,6 @@
+.nav {
+  // 使用全局选择器 但不使用 :global
+  [class*='ant-menu-item'] {
+    margin: 0 16px !important;
+  }
+}

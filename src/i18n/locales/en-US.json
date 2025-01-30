@@ -2,6 +2,10 @@
   "Header": {
     "dashboard": "Dashboard",
     "test": "Test",
-    "reports": "Reports"
+    "reports": "Reports",
+    "disabled": "Disabled"
+  },
+  "Common": {
+    "login": "Login"
   }
 }

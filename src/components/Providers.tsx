@@ -8,7 +8,7 @@ import StyledComponentsRegistry from '@/lib/registry';
 import { useThemeStore } from '@/store/theme';
 import { darkTheme, lightTheme } from '@/theme/token';
 
-interface ProvidersProps {
+export interface ProvidersProps {
   locale: string;
   messages: any;
   children: React.ReactNode;
