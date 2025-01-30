@@ -7,5 +7,11 @@
   },
   "Common": {
     "login": "Login"
+  },
+  "Home": {
+    "title": "Device Power Management Platform",
+    "description": "Real-time monitoring of your device power status, intelligent early warning system helps you effectively manage device energy",
+    "getStarted": "Get Started",
+    "login": "Login"
   }
 }

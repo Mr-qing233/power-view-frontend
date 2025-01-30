@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
 
-import { Providers } from '@/components/Providers';
-
 import { routing } from '@/i18n/routing';
+import { Providers } from '@/sectors/Providers';
+
 import '@/styles/globals.css';
 
 export default async function RootLayout({
