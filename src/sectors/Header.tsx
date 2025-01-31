@@ -13,7 +13,7 @@ import Avatar from '@/components/Avatar';
 import NavigationComponent from '@/components/Navigation';
 
 import { Language, useCurrentLocale, useLanguageStore } from '@/store/language';
-import styles from '@/styles/header.module.scss';
+import styles from '@/styles/components/header.module.scss';
 
 const HeaderBar = () => {
   const pathname = usePathname();

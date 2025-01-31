@@ -13,7 +13,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+        <ThemeProvider attribute="data-mode" defaultTheme="system" enableSystem={true}>
           {children}
         </ThemeProvider>
       </body>

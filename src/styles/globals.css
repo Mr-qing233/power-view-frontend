@@ -17,14 +17,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
-:root {
-  /* Your default theme */
-  --background: white;
-  --foreground: black;
-}
-
-.dark {
-  --background: black;
-  --foreground: white;
-}

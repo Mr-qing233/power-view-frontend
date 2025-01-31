@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { MenuItem } from '@/interfaces/Navigation';
-import styles from '@/styles/navigation.module.scss';
+import styles from '@/styles/components/navigation.module.scss';
 
 const NavigationComponent = () => {
   const t = useTranslations('Header'); // 使用nav命名空间的翻译

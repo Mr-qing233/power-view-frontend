@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/styles/test.module.scss';
+import styles from '@/styles/components/test.module.scss';
 
 export default function TestPage() {
   const sections = Array.from({ length: 30 }, (_, index) => index);

@@ -4,3 +4,22 @@ $header-heigh: 4rem;
 @function px2rem($px) {
   @return ($px / 16) * 1rem;
 }
+
+@mixin light-theme {
+  --background: white;
+  --foreground: black;
+}
+
+@mixin dark-theme {
+  --background: black;
+  --foreground: white;
+}
+
+// 使用scss变量创建css变量
+:root {
+  @include light-theme;
+}
+// 暗色主题
+:global([data-mode='dark']) {
+  @include dark-theme;
+}
