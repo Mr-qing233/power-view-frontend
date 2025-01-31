@@ -1,3 +1,5 @@
+import { ThemeProvider } from 'next-themes';
+
 export default async function RootLayout({
   children,
   params,
@@ -7,9 +9,14 @@ export default async function RootLayout({
 }) {
   // 等待参数
   const { locale } = await params;
+
   return (
-    <html lang={locale} className="overflow-y-hidden">
-      <body>{children}</body>
+    <html lang={locale} suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

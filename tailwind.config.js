@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,6 +8,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // Light mode
+        'layout-header': '#f1f1f1',
+        'layout-sider': '#ffffff',
+        'text-primary': 'rgba(0, 0, 0, 0.88)',
+        'text-secondary': 'rgba(0, 0, 0, 0.45)',
+
+        // Dark mode
+        'dark-layout-header': '#1f1f1f',
+        'dark-layout-sider': '#141414',
+        'dark-text-primary': 'rgba(255, 255, 255, 0.85)',
+        'dark-text-secondary': 'rgba(255, 255, 255, 0.45)',
+      },
       spacing: {
         30: '7.5rem',
         35: '8.75rem',
