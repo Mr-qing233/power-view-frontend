@@ -12,7 +12,7 @@ export type Language = (typeof routing.locales)[number];
 
 // 语言选项列表
 interface LanguageOption {
-  value: string;
+  value: Language;
   label: string;
 }
 

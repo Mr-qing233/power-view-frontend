@@ -1,8 +1,9 @@
 'use client';
 
 import { Layout } from 'antd';
-import { Content, Footer } from 'antd/es/layout/layout';
+import { Content } from 'antd/es/layout/layout';
 
+import Footer from '@/sectors/Footer';
 import HeaderBar from '@/sectors/Header';
 import SiderBar from '@/sectors/SiderBar';
 
@@ -30,9 +31,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           }}
         >
           <Content style={{ flex: '1 0 auto' }}>{children}</Content>
-          <Footer className="text-center" style={{ flexShrink: 0 }}>
-            GinWine Studio ©2025
-          </Footer>
+          <Footer />
         </Layout>
       </Layout>
     </Layout>

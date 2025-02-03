@@ -1,18 +1,33 @@
 $sider-width: 20rem;
 $header-heigh: 4rem;
+$footer-heigh: 4rem;
 
 @function px2rem($px) {
   @return ($px / 16) * 1rem;
 }
 
 @mixin light-theme {
-  --background: white;
+  --text-color: black;
   --foreground: black;
+
+  --bg-base: #ffffff;
+
+  --color-primary: #1890ff;
+  --header-bg-color: #ffffff;
+  --border-color: #f0f0f0;
+
+  --border-radius: 0.5rem;
 }
 
 @mixin dark-theme {
-  --background: black;
+  --background: rgb(255, 255, 255);
+  --text-color: white;
   --foreground: white;
+
+  --bg-base: #3f4054;
+
+  --header-bg-color: #3f4054;
+  --border-color: '';
 }
 
 // 使用scss变量创建css变量

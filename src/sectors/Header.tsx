@@ -3,17 +3,17 @@
 import { useEffect, useState } from 'react';
 
 import { HomeOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons';
-import { Button, Select } from 'antd';
-import { Header } from 'antd/es/layout/layout';
+import { Button } from 'antd';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
 import Avatar from '@/components/Avatar';
 import NavigationComponent from '@/components/Navigation';
+import Select from '@/components/Select';
 
 import { Language, useCurrentLocale, useLanguageStore } from '@/store/language';
-import styles from '@/styles/components/header.module.scss';
+import styles from '@/styles/sectors/header.module.scss';
 
 const HeaderBar = () => {
   const pathname = usePathname();
@@ -52,37 +52,33 @@ const HeaderBar = () => {
   const isDark = theme === 'dark';
 
   return (
-    <Header className={styles.header}>
-      <div className="flex justify-between items-center w-full h-full">
-        {/* Left section */}
-        <div className="flex items-center gap-4  h-full mx-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center justify-center h-full ">
-            <HomeOutlined
-              style={{
-                fontSize: 24,
-                color: '#616161',
-              }}
-            />
-          </Link>
+    <div className={styles.header}>
+      {/* Left section */}
+      <div className="flex items-center gap-4  h-full mx-6">
+        {/* Logo */}
+        <Link href="/" className="flex items-center justify-center h-full ">
+          <HomeOutlined
+            style={{
+              fontSize: 24,
+              color: '#616161',
+            }}
+          />
+        </Link>
 
-          {/* Navigation buttons */}
-          <NavigationComponent />
-        </div>
-        <div className="grow"></div>
-        {/* Right section */}
-        <div className="flex items-center gap-4 mr-4 h-full">
-          {/* Language selector */}
-          <Select defaultValue={locale} style={{ width: 100 }} options={languageOptions} onSelect={onLanguageChange} />
-          {/* Theme toggle */}
-          {/* <Button type="text" icon={isDarkMode ? <SunOutlined /> : <MoonOutlined />} onClick={toggleTheme} /> */}
-          {renderThemeChanger()} {/* 使用新的渲染函数 */}
-          {/* Avatar */}
-          {/* <div className=" bg-slate-500 rounded-full w-10 h-10" /> */}
-          <Avatar />
-        </div>
+        {/* Navigation buttons */}
+        <NavigationComponent />
       </div>
-    </Header>
+      <div className="grow"></div>
+      {/* Right section */}
+      <div className="flex items-center gap-4 mr-4 h-full">
+        {/* Language selector */}
+        <Select value={locale} options={languageOptions} onChange={onLanguageChange} />
+        {/* Theme toggle */}
+        {renderThemeChanger()} {/* 使用新的渲染函数 */}
+        {/* Avatar */}
+        <Avatar />
+      </div>
+    </div>
   );
 };
 
