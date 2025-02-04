@@ -1,0 +1,77 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to bottom right, var(--bg-color-lt), var(--bg-color-rb));
+}
+
+.content {
+  text-align: center;
+  padding: 1.5rem 1.5rem 3rem;
+  border-radius: 1rem;
+  background-color: var(--card-bg-color);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  max-width: 42rem;
+  margin: 0 1rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 640px) {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--description-color);
+  margin-bottom: 2rem;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.primaryButton {
+  width: 6rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--primary-button-bg-color);
+  color: var(--text-color-white);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--primary-button-hover-bg-color);
+    color: var(--text-color-white);
+  }
+}
+
+.secondaryButton {
+  width: 6rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--secondary-button-bg-color);
+  color: var(--secondary-button-color);
+  border: 1px solid var(--secondary-button-border-color);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: var(--secondary-button-hover-bg-color);
+  }
+}

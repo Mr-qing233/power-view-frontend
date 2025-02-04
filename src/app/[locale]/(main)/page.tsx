@@ -1,27 +1,40 @@
+'use client';
+
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
+import useUserStore from '@/store/user';
+import styles from '@/styles/pages/homePage.module.scss';
+
 const HomePage = () => {
   const t = useTranslations('Home');
+  const { userInfo } = useUserStore();
+
+  const renderLoginButton = () => {
+    if (userInfo?.state) {
+      return (
+        <Link href="https://github.com/Mr-qing233" className={styles.secondaryButton}>
+          {t('learnMore')}
+        </Link>
+      );
+    }
+    return (
+      <Link href="/login" className={styles.secondaryButton}>
+        {t('login')}
+      </Link>
+    );
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-950">
-      <div className="text-center px-6 py-12 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl max-w-2xl mx-4">
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">{t('title')}</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto">{t('description')}</p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/dashboard"
-            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
-          >
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>{t('title')}</h1>
+        <p className={styles.description}>{t('description')}</p>
+        <div className={styles.buttonContainer}>
+          <Link href="/dashboard" className={styles.primaryButton}>
             {t('getStarted')}
           </Link>
-          <Link
-            href="/login"
-            className="px-8 py-3 bg-white hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 rounded-lg font-medium transition-colors"
-          >
-            {t('login')}
-          </Link>
+          {renderLoginButton()}
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@ $footer-heigh: 4rem;
 }
 
 @mixin light-theme {
-  --text-color: black;
-  --foreground: black;
+  --text-color-white: #ffffff;
+  --text-color-black: #000000;
 
   --bg-base: #ffffff;
 
@@ -17,17 +17,39 @@ $footer-heigh: 4rem;
   --border-color: #f0f0f0;
 
   --border-radius: 0.5rem;
+
+  // HomePage
+  --bg-color-lt: #f8faff;
+  --bg-color-rb: #e0e7ff;
+  --card-bg-color: rgba(255, 255, 255, 0.8);
+  --title-color: #111827;
+  --description-color: #4b5563;
+  --primary-button-bg-color: #4f46e5;
+  --primary-button-hover-bg-color: #4338ca;
+  --secondary-button-bg-color: #ffffff;
+  --secondary-button-color: #111827;
+  --secondary-button-border-color: #e5e7eb;
+  --secondary-button-hover-bg-color: #f9fafb;
 }
 
 @mixin dark-theme {
   --background: rgb(255, 255, 255);
-  --text-color: white;
-  --foreground: white;
 
   --bg-base: #3f4054;
 
   --header-bg-color: #3f4054;
   --border-color: '';
+
+  // HomePage
+  --bg-color-lt: #111827;
+  --bg-color-rb: #1e1b4b;
+  --card-bg-color: rgba(31, 41, 55, 0.8);
+  --title-color: #ffffff;
+  --description-color: #d1d5db;
+  --secondary-button-bg-color: #374151;
+  --secondary-button-color: #ffffff;
+  --secondary-button-border-color: #4b5563;
+  --secondary-button-hover-bg-color: #4b5563;
 }
 
 // 使用scss变量创建css变量
