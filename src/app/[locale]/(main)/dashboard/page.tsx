@@ -1,39 +1,191 @@
 'use client';
 
-// 数据概览
+import { useEffect, useRef } from 'react';
 
-import { Button } from 'antd';
+import * as echarts from 'echarts';
 
-// import style from './page.module.scss';
+import styles from './page.module.scss';
 
-import useUserStore from '@/store/user';
+// 模拟数据
+const mockDeviceStats = {
+  totalDevices: 100,
+  onlineDevices: 85,
+  alertDevices: 5,
+  lowBatteryDevices: 8,
+  deviceStatusDistribution: [
+    { status: '在线', count: 85, color: '#52c41a' },
+    { status: '离线', count: 10, color: '#8c8c8c' },
+    { status: '告警', count: 5, color: '#ff4d4f' },
+  ],
+  batteryDistribution: [
+    { range: '0-20%', count: 8, color: '#ff4d4f' },
+    { range: '20-50%', count: 15, color: '#faad14' },
+    { range: '50-80%', count: 45, color: '#1890ff' },
+    { range: '80-100%', count: 32, color: '#52c41a' },
+  ],
+  activityTrend: Array.from({ length: 7 }, (_, i) => ({
+    date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
+    activeDevices: Math.floor(Math.random() * 20) + 70,
+  })),
+};
+
+const StatCard = ({ title, value }: { title: string; value: number | string }) => (
+  <div className={styles.card}>
+    <div className={styles.title}>{title}</div>
+    <div className={styles.value}>{value}</div>
+  </div>
+);
 
 const Dashboard = () => {
-  const { userInfo, token, updateUserInfo, updateAge, updateToken } = useUserStore();
+  const statusChartRef = useRef<HTMLDivElement>(null);
+  const batteryChartRef = useRef<HTMLDivElement>(null);
+  const trendChartRef = useRef<HTMLDivElement>(null);
 
-  if (!userInfo?.state) {
-    return (
-      <Button
-        type="primary"
-        onClick={() => {
-          updateUserInfo({ name: 'test', age: 11, state: true });
-          updateToken('123');
-        }}
-      >
-        Button
-      </Button>
-    );
-  }
+  useEffect(() => {
+    // 设备状态分布图表
+    if (statusChartRef.current) {
+      const chart = echarts.init(statusChartRef.current);
+      chart.setOption({
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b}: {c} ({d}%)',
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+        },
+        series: [
+          {
+            type: 'pie',
+            radius: '70%',
+            data: mockDeviceStats.deviceStatusDistribution.map((item) => ({
+              name: item.status,
+              value: item.count,
+              itemStyle: { color: item.color },
+            })),
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
+      });
+    }
+
+    // 电量分布图表
+    if (batteryChartRef.current) {
+      const chart = echarts.init(batteryChartRef.current);
+      chart.setOption({
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+        },
+        xAxis: {
+          type: 'category',
+          data: mockDeviceStats.batteryDistribution.map((item) => item.range),
+        },
+        yAxis: {
+          type: 'value',
+        },
+        series: [
+          {
+            type: 'bar',
+            data: mockDeviceStats.batteryDistribution.map((item) => ({
+              value: item.count,
+              itemStyle: { color: item.color },
+            })),
+            barWidth: '50%',
+          },
+        ],
+      });
+    }
+
+    // 活动趋势图表
+    if (trendChartRef.current) {
+      const chart = echarts.init(trendChartRef.current);
+      chart.setOption({
+        tooltip: {
+          trigger: 'axis',
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: mockDeviceStats.activityTrend.map((item) => item.date),
+        },
+        yAxis: {
+          type: 'value',
+        },
+        series: [
+          {
+            type: 'line',
+            data: mockDeviceStats.activityTrend.map((item) => item.activeDevices),
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: 'rgba(24,144,255,0.3)' },
+                { offset: 1, color: 'rgba(24,144,255,0.1)' },
+              ]),
+            },
+            lineStyle: {
+              color: '#1890ff',
+            },
+            itemStyle: {
+              color: '#1890ff',
+            },
+            smooth: true,
+          },
+        ],
+      });
+    }
+
+    // 清理函数
+    return () => {
+      [statusChartRef, batteryChartRef, trendChartRef].forEach((ref) => {
+        if (ref.current) {
+          echarts.getInstanceByDom(ref.current)?.dispose();
+        }
+      });
+    };
+  }, []);
 
   return (
-    <div className="App">
-      <div>
-        姓名: {userInfo?.name} 年龄: {userInfo?.age}
+    <div className={styles.dashboard}>
+      <div className={styles.grid}>
+        <StatCard title="设备总数" value={mockDeviceStats.totalDevices} />
+        <StatCard title="在线设备" value={mockDeviceStats.onlineDevices} />
+        <StatCard title="告警设备" value={mockDeviceStats.alertDevices} />
+        <StatCard title="低电量设备" value={mockDeviceStats.lowBatteryDevices} />
       </div>
-      <div>token: {token}</div>
-      <button onClick={() => updateUserInfo({ name: 'lisi', age: 24, state: true })}>更新用户</button>
-      <button onClick={() => updateAge(20)}>更新年龄</button>
-      <button onClick={() => updateToken('23652')}>更新token</button>
+
+      <div className={styles.charts}>
+        <div className={styles.card}>
+          <div className={styles.title}>设备状态分布</div>
+          <div ref={statusChartRef} className={styles.chart}></div>
+        </div>
+        <div className={styles.card}>
+          <div className={styles.title}>设备电量分布</div>
+          <div ref={batteryChartRef} className={styles.chart}></div>
+        </div>
+      </div>
+
+      <div className={styles.trend}>
+        <div className={styles.title}>设备活动趋势</div>
+        <div ref={trendChartRef} className={styles.chart}></div>
+      </div>
     </div>
   );
 };
