@@ -1,0 +1,7 @@
+.login {
+  color: var(--color-primary);
+  user-select: none;
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -14,6 +14,7 @@ interface UserState {
   updateUserInfo: (params: UserInfo) => void;
   updateAge: (params: number) => void;
   updateToken: (params: string) => void;
+  clearUser: () => void;
 }
 
 // 创建状态存储
@@ -34,6 +35,10 @@ const useUserStore = create<UserState>()(
         ),
       //更新原始数据类型
       updateToken: (token) => set({ token }),
+      clearUser: () => {
+        set({ userInfo: null, token: null });
+        localStorage.removeItem('user-storage');
+      },
     }),
     {
       // localStorage中的存储键名

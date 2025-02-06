@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from 'antd';
+import { Button } from '@/components/ui/button';
 
 import useUserStore from '@/store/user';
 import styles from '@/styles/components/test.module.scss';
@@ -13,7 +13,7 @@ export default function TestPage() {
     if (!userInfo?.state) {
       return (
         <Button
-          type="primary"
+          variant="secondary"
           onClick={() => {
             updateUserInfo({ name: 'test', age: 11, state: true });
             updateToken('123');

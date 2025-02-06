@@ -10,7 +10,7 @@ $footer-heigh: 4rem;
   --text-color-white: #ffffff;
   --text-color-black: #000000;
 
-  --bg-base: #ffffff;
+  --foreground: #000000 --bg-base: #ffffff;
 
   --color-primary: #1890ff;
   --header-bg-color: #ffffff;
@@ -34,7 +34,7 @@ $footer-heigh: 4rem;
 
 @mixin dark-theme {
   --background: rgb(255, 255, 255);
-
+  --foreground: #ffffff;
   --bg-base: #3f4054;
 
   --header-bg-color: #3f4054;

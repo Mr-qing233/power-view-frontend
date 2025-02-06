@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { HomeOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { House, Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -11,6 +10,7 @@ import { useTheme } from 'next-themes';
 import Avatar from '@/components/Avatar';
 import NavigationComponent from '@/components/Navigation';
 import Select from '@/components/Select';
+import { Button } from '@/components/ui/button';
 
 import { Language, useCurrentLocale, useLanguageStore } from '@/store/language';
 import styles from '@/styles/sectors/header.module.scss';
@@ -43,9 +43,7 @@ const HeaderBar = () => {
       return null; // 在客户端挂载前不渲染主题切换按钮
     }
 
-    return (
-      <Button onClick={() => setTheme(isDark ? 'light' : 'dark')}>{isDark ? <SunOutlined /> : <MoonOutlined />}</Button>
-    );
+    return <Button onClick={() => setTheme(isDark ? 'light' : 'dark')}>{isDark ? <Sun /> : <Moon />}</Button>;
   };
 
   // 替换原来的isDarkMode判断
@@ -54,10 +52,10 @@ const HeaderBar = () => {
   return (
     <div className={styles.header}>
       {/* Left section */}
-      <div className="flex items-center gap-4  h-full mx-6">
+      <div className="flex items-center gap-4 h-full mx-6">
         {/* Logo */}
         <Link href="/" className="flex items-center justify-center h-full ">
-          <HomeOutlined
+          <House
             style={{
               fontSize: 24,
               color: '#616161',
@@ -72,7 +70,7 @@ const HeaderBar = () => {
       {/* Right section */}
       <div className="flex items-center gap-4 mr-4 h-full">
         {/* Language selector */}
-        <Select value={locale} options={languageOptions} onChange={onLanguageChange} />
+        <Select value={locale} options={languageOptions} onChange={onLanguageChange} className="w-24" />
         {/* Theme toggle */}
         {renderThemeChanger()} {/* 使用新的渲染函数 */}
         {/* Avatar */}
