@@ -49,6 +49,7 @@ const eslintConfig = [
       '@typescript-eslint/ban-ts-comment': 'off', // 允许使用 @ts-ignore
       '@typescript-eslint/no-non-null-assertion': 'off', // 允许使用非空断言
       '@typescript-eslint/no-var-requires': 'off', // 允许使用 CommonJS 的写法
+      'react/prop-types': 'off',  // 关闭此规则，因为我们使用 TypeScript
       'no-console': [
         'warn',
         {

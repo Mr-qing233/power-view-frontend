@@ -14,6 +14,9 @@ import { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
 
+import Battery from '@/components/Battery';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 import styles from './page.module.scss';
 
 /**
@@ -77,24 +80,6 @@ const mockDeviceStats = {
     date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
     activeDevices: Math.floor(Math.random() * 20) + 70,
   })),
-
-  batteryLineDevice: [
-    {
-      data: '数据一',
-      value: 0.6,
-      arr: 1,
-    },
-    {
-      data: '数据二',
-      value: 0.95,
-      arr: 1,
-    },
-    {
-      data: '数据三',
-      value: 0.85,
-      arr: 1,
-    },
-  ],
 };
 
 /**
@@ -107,21 +92,27 @@ const StatCard = ({ title, value }: { title: string; value: number | string }) =
   </div>
 );
 
-/**
- * 耗电排行列表组件
- */
-const ConsumptionList = ({ data }: { data: typeof mockDeviceStats.batteryConsumption }) => (
-  <div className={styles.list}>
-    {data.map((item) => (
-      <div key={item.deviceId} className={styles.item}>
-        <div className={styles.info}>
-          <div className={styles.name}>{item.deviceName}</div>
-          <div className={styles.detail}>当前电量：{item.currentBattery}%</div>
-        </div>
-        <div className={styles.consumption}>-{item.consumption}%/天</div>
-      </div>
-    ))}
-  </div>
+const ConsumptionTable = ({ data }: { data: typeof mockDeviceStats.batteryConsumption }) => (
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>DeviceName</TableHead>
+        <TableHead>Battery</TableHead>
+        <TableHead>Consumption</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {data.map((item) => (
+        <TableRow key={item.deviceId}>
+          <TableCell className="text-center p-0 ">{item.deviceName}</TableCell>
+          <TableCell className="p-0 w-full h-14">
+            <Battery value={item.currentBattery} style={{ showPercentage: true, height: 30, labelWidth: 40 }} />
+          </TableCell>
+          <TableCell className="p-0 text-center">{item.consumption}</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
 );
 
 const Dashboard = () => {
@@ -241,125 +232,9 @@ const Dashboard = () => {
       });
     }
 
-    if (batteryLineChartRef.current) {
-      const chart = echarts.init(batteryLineChartRef.current);
-      chart.setOption({
-        tooltip: { show: false },
-        xAxis: {
-          type: 'value',
-          min: 0,
-          max: 1,
-          axisLine: { show: false },
-          splitLine: { show: false },
-          axisLabel: { show: false },
-          axisTick: { show: false },
-        },
-        yAxis: {
-          //show: false,
-          type: 'category',
-          inverse: true,
-          splitLine: { show: false },
-          axisLine: { show: false },
-          axisLabel: {
-            show: true,
-            interval: 0,
-            margin: 10,
-            textStyle: {
-              color: '#000',
-              fontSize: 16,
-              fontWeight: 'bold',
-            },
-          },
-          axisTick: { show: false },
-          data: mockDeviceStats.batteryLineDevice.map((item) => item.data),
-        },
-        series: [
-          {
-            //渐变数据内容
-            type: 'bar',
-            barWidth: '34%',
-            animationDuration: 2000,
-            itemStyle: {
-              normal: {
-                borderWidth: 0,
-                color: {
-                  type: 'linear',
-                  x: 0,
-                  y: 0,
-                  x2: 1,
-                  y2: 0,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: '#00a0e9',
-                    },
-                    {
-                      offset: 1,
-                      color: '#00ffff',
-                    },
-                  ],
-                },
-              },
-            },
-            label: {
-              show: false,
-            },
-            data: mockDeviceStats.batteryLineDevice.map((item) => item.value),
-            z: 0,
-          },
-          {
-            //背景柱状图
-            type: 'bar',
-            barWidth: '34%',
-            barGap: '-100%',
-            animation: false,
-            itemStyle: {
-              normal: {
-                borderWidth: 0,
-                color: 'rgba(0,202,255,0.2)',
-              },
-            },
-            data: mockDeviceStats.batteryLineDevice.map((item) => item.arr),
-            z: 0,
-          },
-
-          {
-            //辅助分割图形
-            type: 'pictorialBar',
-            barWidth: '34%',
-            symbol: 'rect',
-            // symbolRotate:"-20",
-            symbolMargin: '200%', //控制分割图形的大小
-            symbolSize: [4, '100%'],
-            symbolRepeat: true,
-            animation: false,
-            itemStyle: {
-              normal: {
-                color: '#fff',
-              },
-            },
-            label: {
-              normal: {
-                color: '#000',
-                show: true,
-                position: ['101%', '40%'],
-                fontSize: 22,
-                fontWeight: 'bold',
-                formatter: function (params: { dataIndex: number }) {
-                  return ' ' + mockDeviceStats.batteryLineDevice[params.dataIndex].value * 100 + '%';
-                },
-              },
-            },
-            data: mockDeviceStats.batteryLineDevice.map((item) => item.arr),
-            z: 1,
-          },
-        ],
-      });
-    }
-
     // 图表自适应和清理
     const handleResize = () => {
-      [statusChartRef, batteryChartRef, trendChartRef].forEach((ref) => {
+      [statusChartRef, batteryChartRef, trendChartRef, batteryLineChartRef].forEach((ref) => {
         if (ref.current) {
           echarts.getInstanceByDom(ref.current)?.resize();
         }
@@ -370,7 +245,7 @@ const Dashboard = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      [statusChartRef, batteryChartRef, trendChartRef].forEach((ref) => {
+      [statusChartRef, batteryChartRef, trendChartRef, batteryLineChartRef].forEach((ref) => {
         if (ref.current) {
           echarts.getInstanceByDom(ref.current)?.dispose();
         }
@@ -397,13 +272,15 @@ const Dashboard = () => {
             <div className={styles.title}>设备电量分布</div>
             <div ref={batteryChartRef} className={styles.chart}></div>
           </div>
-          <div className={styles.card}>
+          {/* <div className={styles.card}>
             <div className={styles.title}>耗电最快设备</div>
             <ConsumptionList data={mockDeviceStats.batteryConsumption} />
-          </div>
+          </div> */}
           <div className={styles.card}>
-            <div className={styles.title}>设备电量分布</div>
-            <div ref={batteryLineChartRef} className={styles.line}></div>
+            <div className={styles.title}>耗电最快设备</div>
+            <div className={styles.batteryLineChart}>
+              <ConsumptionTable data={mockDeviceStats.batteryConsumption} />
+            </div>
           </div>
         </div>
 

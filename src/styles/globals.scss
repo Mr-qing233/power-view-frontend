@@ -10,7 +10,8 @@ $footer-heigh: 4rem;
   --text-color-white: #ffffff;
   --text-color-black: #000000;
 
-  --foreground: #000000 --bg-base: #ffffff;
+  --foreground: #000000;
+  --bg-base: #ffffff;
 
   --color-primary: #1890ff;
   --header-bg-color: #ffffff;
@@ -30,6 +31,15 @@ $footer-heigh: 4rem;
   --secondary-button-color: #111827;
   --secondary-button-border-color: #e5e7eb;
   --secondary-button-hover-bg-color: #f9fafb;
+
+  // dashboard
+
+  // 电池条背景色
+  --battery-bg: rgba(0, 202, 255, 0.2);
+
+  // 默认渐变色
+  --battery-color-start: #1890ff;
+  --battery-color-end: #69c0ff;
 }
 
 @mixin dark-theme {
@@ -50,6 +60,11 @@ $footer-heigh: 4rem;
   --secondary-button-color: #ffffff;
   --secondary-button-border-color: #4b5563;
   --secondary-button-hover-bg-color: #4b5563;
+
+  // dashboard
+  --battery-bg: rgba(255, 255, 255, 0.08);
+  --battery-color-start: #177ddc;
+  --battery-color-end: #3c9ae8;
 }
 
 // 使用scss变量创建css变量
