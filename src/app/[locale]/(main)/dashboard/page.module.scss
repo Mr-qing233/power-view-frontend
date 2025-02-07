@@ -1,56 +1,122 @@
+/**
+ * 仪表盘页面样式
+ * 使用CSS Grid实现响应式布局
+ * 支持主题切换（通过CSS变量）
+ */
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
 .dashboard {
   padding: 24px;
 
+  // 顶部统计卡片网格布局
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr); // 默认4列布局
+    gap: 24px; // 卡片间距
     margin-bottom: 24px;
   }
 
+  // 中部图表区域网格布局
   .charts {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr); // 默认3列布局
     gap: 24px;
     margin-bottom: 24px;
   }
 
+  // 卡片通用样式
   .card {
-    background: var(--background-card);
+    background: var(--background-card); // 支持主题切换的背景色
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; // 圆角边框
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // 阴影效果
 
+    // 卡片标题样式
     .title {
       font-size: 14px;
-      color: var(--text-secondary);
+      color: var(--text-secondary); // 次要文本颜色
       margin-bottom: 8px;
     }
 
+    // 数值样式
     .value {
       font-size: 24px;
       font-weight: bold;
-      color: var(--text-primary);
+      color: var(--text-primary); // 主要文本颜色
     }
 
+    // 图表容器样式
     .chart {
       width: 100%;
-      height: 300px;
+      height: 200px;
+    }
+
+    .line {
+      width: 100%;
+      height: 200px;
+    }
+
+    // 排行榜样式
+    .list {
+      margin-top: 12px;
+      height: 200px;
+      overflow-y: auto;
+      // 隐藏滚动条但保持滚动功能
+      &::-webkit-scrollbar {
+        display: none; // Chrome, Safari, newer versions of Opera
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .info {
+          flex: 1;
+          .name {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+          }
+          .detail {
+            font-size: 12px;
+            color: var(--text-secondary);
+          }
+        }
+
+        .consumption {
+          font-size: 14px;
+          color: #ff4d4f;
+          font-weight: 500;
+        }
+      }
     }
   }
 
+  // 底部趋势图表样式
   .trend {
     background: var(--background-card);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
+    // 趋势图标题
     .title {
       font-size: 16px;
       color: var(--text-primary);
       margin-bottom: 16px;
     }
 
+    // 趋势图容器
     .chart {
       width: 100%;
       height: 300px;
@@ -58,22 +124,36 @@
   }
 }
 
+/**
+ * 响应式布局断点
+ */
+
+// 平板电脑及以下（<= 1200px）
 @media (max-width: 1200px) {
   .dashboard {
     .grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr); // 改为2列布局
     }
 
     .charts {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr); // 图表改为2列布局
     }
   }
 }
 
+// 手机端（<= 768px）
 @media (max-width: 768px) {
   .dashboard {
+    padding: 16px;
+
     .grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; // 改为单列布局
+      gap: 16px;
+    }
+
+    .charts {
+      grid-template-columns: 1fr; // 改为单列布局
+      gap: 16px;
     }
   }
 }
