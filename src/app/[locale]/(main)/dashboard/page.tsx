@@ -113,7 +113,15 @@ const ConsumptionTable = ({ data }: { data: typeof mockDeviceStats.batteryConsum
         <TableRow key={item.deviceId}>
           <TableCell className="text-center p-0 ">{item.deviceName}</TableCell>
           <TableCell className="p-0 w-full h-14">
-            <Battery value={item.currentBattery} style={{ showPercentage: true, height: 30, labelWidth: 40 }} />
+            <Battery
+              value={item.currentBattery}
+              style={{
+                showPercentage: true,
+                height: 30,
+                labelWidth: 40,
+                sliceColorVariable: '--battery-slice-color',
+              }}
+            />
           </TableCell>
           <TableCell className="p-0 text-center">{item.consumption}</TableCell>
         </TableRow>

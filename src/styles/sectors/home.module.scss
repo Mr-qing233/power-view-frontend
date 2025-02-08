@@ -1,0 +1,12 @@
+.container {
+  height: calc(100vh - 64px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 1 0%;
+  flex-shrink: 0;
+  background-image: linear-gradient(to bottom right, var(--bg-color-lt), var(--bg-color-rb));
+}

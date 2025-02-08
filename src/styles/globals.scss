@@ -19,12 +19,16 @@ $footer-heigh: 4rem;
 
   --border-radius: 0.5rem;
 
-  // HomePage
+  // layout
   --bg-color-lt: #f8faff;
   --bg-color-rb: #e0e7ff;
+
+  --text-primary-color: #111827;
+  --text-secondary-color: : #4b5563;
+
+  // HomePage
   --card-bg-color: rgba(255, 255, 255, 0.8);
-  --title-color: #111827;
-  --description-color: #4b5563;
+
   --primary-button-bg-color: #4f46e5;
   --primary-button-hover-bg-color: #4338ca;
   --secondary-button-bg-color: #ffffff;
@@ -33,9 +37,12 @@ $footer-heigh: 4rem;
   --secondary-button-hover-bg-color: #f9fafb;
 
   // dashboard
+  --card-background: #ffffff;
 
   // 电池条背景色
   --battery-bg: rgba(0, 202, 255, 0.2);
+  // 电池分割线颜色
+  --battery-slice-color: #ffffff;
 
   // 默认渐变色
   --battery-color-start: #1890ff;
@@ -50,12 +57,17 @@ $footer-heigh: 4rem;
   --header-bg-color: #3f4054;
   --border-color: '';
 
-  // HomePage
+  // layout
   --bg-color-lt: #111827;
   --bg-color-rb: #1e1b4b;
+
+  --text-primary-color: #ffffff;
+  --text-secondary-color: #d1d5db;
+
+  // HomePage
+
   --card-bg-color: rgba(31, 41, 55, 0.8);
-  --title-color: #ffffff;
-  --description-color: #d1d5db;
+
   --secondary-button-bg-color: #374151;
   --secondary-button-color: #ffffff;
   --secondary-button-border-color: #4b5563;
@@ -65,6 +77,18 @@ $footer-heigh: 4rem;
   --battery-bg: rgba(255, 255, 255, 0.08);
   --battery-color-start: #177ddc;
   --battery-color-end: #3c9ae8;
+
+  // dashboard
+  // card bg相同
+
+  // 电池条背景色
+  --battery-bg: rgba(0, 202, 255, 0.2);
+  // 电池分割线颜色
+  --battery-slice-color: #000000;
+
+  // 默认渐变色
+  --battery-color-start: #1890ff;
+  --battery-color-end: #69c0ff;
 }
 
 // 使用scss变量创建css变量

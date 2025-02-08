@@ -26,6 +26,8 @@ interface BatteryProps {
     height?: number | string; // 容器高度
     colors?: [string, string]; // 渐变色起止颜色
     backgroundColor?: string; // 背景色
+    sliceColor?: string; // 分割线颜色
+    sliceColorVariable?: string; // 分割线颜色CSS变量
     showPercentage?: boolean; // 是否显示百分比标签
     labelWidth?: number | string; // 标签宽度
   };
@@ -63,6 +65,9 @@ const createBatteryChartOption = (value: number, style?: BatteryProps['style']) 
   const colors = style?.colors || getDefaultColors(value);
   // 从CSS变量获取背景色，支持主题切换
   const backgroundColor = style?.backgroundColor || getCSSVariable('--battery-bg', 'rgba(0,0,0,0.04)');
+  // 从CSS变量获取分割线颜色，支持主题切换
+  const sliceColor =
+    style?.sliceColor || getCSSVariable(style?.sliceColorVariable || '--battery-slice-color', 'rgba(0,0,0,0.04)');
 
   return {
     animation: true, // 启用动画效果
@@ -136,7 +141,7 @@ const createBatteryChartOption = (value: number, style?: BatteryProps['style']) 
         animation: false,
         itemStyle: {
           normal: {
-            color: '#fff',
+            color: sliceColor, // 分割线颜色
           },
         },
 
