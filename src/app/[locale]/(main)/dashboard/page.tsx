@@ -35,8 +35,8 @@ const mockDeviceStats = {
   batteryDistribution: [
     { range: '0-20%', count: 8, color: '#ff4d4f' },
     { range: '20-50%', count: 15, color: '#faad14' },
-    { range: '50-80%', count: 45, color: '#1890ff' },
-    { range: '80-100%', count: 32, color: '#52c41a' },
+    { range: '50-90%', count: 45, color: '#1890ff' },
+    { range: '90-100%', count: 32, color: '#52c41a' },
   ],
   // 最近7天耗电最快的设备
   batteryConsumption: [
@@ -76,10 +76,17 @@ const mockDeviceStats = {
       lastUpdate: '2025/02/06',
     },
   ],
-  activityTrend: Array.from({ length: 7 }, (_, i) => ({
-    date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
-    activeDevices: Math.floor(Math.random() * 20) + 70,
-  })),
+  batteryTrend: {
+    dates: Array.from({ length: 7 }, (_, i) =>
+      new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
+    ),
+    data: {
+      critical: Array.from({ length: 7 }, () => Math.floor(Math.random() * 5) + 3), // 0-20%
+      warning: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10) + 5), // 20-50%
+      normal: Array.from({ length: 7 }, () => Math.floor(Math.random() * 15) + 40), // 50-90%
+      good: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10) + 25), // >90%
+    },
+  },
 };
 
 /**
@@ -189,7 +196,7 @@ const Dashboard = () => {
       });
     }
 
-    // 活动趋势图表
+    // 电量变动趋势图表
     if (trendChartRef.current) {
       const chart = echarts.init(trendChartRef.current);
       chart.setOption({
@@ -205,27 +212,45 @@ const Dashboard = () => {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: mockDeviceStats.activityTrend.map((item) => item.date),
+          data: mockDeviceStats.batteryTrend.dates,
         },
         yAxis: {
           type: 'value',
         },
+        legend: {
+          data: ['电量不足', '低电量', '正常', '良好'],
+        },
         series: [
           {
+            name: '电量不足',
             type: 'line',
-            data: mockDeviceStats.activityTrend.map((item) => item.activeDevices),
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: 'rgba(24,144,255,0.3)' },
-                { offset: 1, color: 'rgba(24,144,255,0.1)' },
-              ]),
-            },
-            lineStyle: {
-              color: '#1890ff',
-            },
-            itemStyle: {
-              color: '#1890ff',
-            },
+            data: mockDeviceStats.batteryTrend.data.critical,
+            itemStyle: { color: '#ff4d4f' },
+            areaStyle: { opacity: 0.1 },
+            smooth: true,
+          },
+          {
+            name: '低电量',
+            type: 'line',
+            data: mockDeviceStats.batteryTrend.data.warning,
+            itemStyle: { color: '#faad14' },
+            areaStyle: { opacity: 0.1 },
+            smooth: true,
+          },
+          {
+            name: '正常',
+            type: 'line',
+            data: mockDeviceStats.batteryTrend.data.normal,
+            itemStyle: { color: '#1890ff' },
+            areaStyle: { opacity: 0.1 },
+            smooth: true,
+          },
+          {
+            name: '良好',
+            type: 'line',
+            data: mockDeviceStats.batteryTrend.data.good,
+            itemStyle: { color: '#52c41a' },
+            areaStyle: { opacity: 0.1 },
             smooth: true,
           },
         ],
@@ -285,7 +310,7 @@ const Dashboard = () => {
         </div>
 
         <div className={styles.trend}>
-          <div className={styles.title}>设备活动趋势</div>
+          <div className={styles.title}>设备电量变动趋势</div>
           <div ref={trendChartRef} className={styles.chart}></div>
         </div>
       </div>

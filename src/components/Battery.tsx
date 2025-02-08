@@ -37,8 +37,8 @@ interface BatteryProps {
  * 根据不同电量区间返回对应的颜色
  * - ≤20%: 红色警告色
  * - ≤50%: 橙色警示色
- * - ≤80%: 蓝色提示色
- * - >80%: 绿色正常色
+ * - ≤90%: 蓝色提示色
+ * - >90%: 绿色正常色
  *
  * @param value - 电量值（0-100）
  * @returns [开始颜色, 结束颜色]
@@ -46,7 +46,7 @@ interface BatteryProps {
 const getDefaultColors = (value: number): [string, string] => {
   if (value <= 20) return ['#ff4d4f', '#ff7875']; // 红色警告
   if (value <= 50) return ['#faad14', '#ffc53d']; // 橙色警示
-  if (value <= 80) return ['#1890ff', '#69c0ff']; // 蓝色提示
+  if (value <= 90) return ['#1890ff', '#69c0ff']; // 蓝色提示
   return ['#52c41a', '#95de64']; // 绿色正常
 };
 
