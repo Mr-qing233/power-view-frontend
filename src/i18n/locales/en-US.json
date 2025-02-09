@@ -14,5 +14,22 @@
     "getStarted": "Get Started",
     "login": "Login",
     "learnMore": "Learn More"
+  },
+  "Dashboard": {
+    "deviceCount": "Device Count",
+    "deviceOnline": "Device Online",
+    "deviceOffline": "Device Offline",
+    "deviceLowPower": "Device Low Power",
+    "stateDeviceDistribution": "Device status distribution",
+    "stateFine": "Fine",
+    "stateNormal": "Normal",
+    "stateLowBattery": "Low Battery",
+    "stateNoPower": "No Power",
+    "devicePowerDistribution": "Device power distribution",
+    "devicePowerConsumption": "Device power consumption",
+    "deviceChangeTrend": "Device change trend",
+    "deviceName": "Name",
+    "deviceBattery": "Battery",
+    "deviceConsumption": "Consumption"
   }
 }

@@ -13,6 +13,7 @@
 import { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
+import { useTranslations } from 'next-intl';
 
 import Battery from '@/components/Battery';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -23,14 +24,15 @@ import styles from './page.module.scss';
  * 模拟数据
  */
 const mockDeviceStats = {
-  totalDevices: 100,
+  totalDevices: 135,
   onlineDevices: 85,
-  alertDevices: 5,
+  offlineDevices: 5,
   lowBatteryDevices: 8,
   deviceStatusDistribution: [
-    { status: '在线', count: 85, color: '#52c41a' },
-    { status: '离线', count: 10, color: '#8c8c8c' },
-    { status: '告警', count: 5, color: '#ff4d4f' },
+    { status: 0, count: 85, color: '#52c41a' }, // 良好
+    { status: 1, count: 10, color: '#1890FF' }, // 正常
+    { status: 2, count: 35, color: '#8c8c8c' }, // 低电量
+    { status: 3, count: 5, color: '#ff4d4f' }, // 电量不足
   ],
   batteryDistribution: [
     { range: '0-20%', count: 8, color: '#ff4d4f' },
@@ -38,6 +40,7 @@ const mockDeviceStats = {
     { range: '50-90%', count: 45, color: '#1890ff' },
     { range: '90-100%', count: 32, color: '#52c41a' },
   ],
+
   // 最近7天耗电最快的设备
   batteryConsumption: [
     {
@@ -99,13 +102,13 @@ const StatCard = ({ title, value }: { title: string; value: number | string }) =
   </div>
 );
 
-const ConsumptionTable = ({ data }: { data: typeof mockDeviceStats.batteryConsumption }) => (
+const ConsumptionTable = ({ data, column }: { data: typeof mockDeviceStats.batteryConsumption; column: string[] }) => (
   <Table>
     <TableHeader>
       <TableRow>
-        <TableHead>DeviceName</TableHead>
-        <TableHead>Battery</TableHead>
-        <TableHead>Consumption</TableHead>
+        {column.map((item) => (
+          <TableHead key={item}>{item}</TableHead>
+        ))}
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -136,7 +139,22 @@ const Dashboard = () => {
   const trendChartRef = useRef<HTMLDivElement>(null);
   const batteryLineChartRef = useRef<HTMLDivElement>(null);
 
+  const t = useTranslations('Dashboard');
+  // 耗电排行榜column
+  const consumptionColumn = [t('deviceName'), t('deviceBattery'), t('deviceConsumption')];
   useEffect(() => {
+    const state2Name = (state: number) => {
+      if (state == 0) {
+        return t('stateFine');
+      } else if (state == 1) {
+        return t('stateNormal');
+      } else if (state == 2) {
+        return t('stateLowBattery');
+      } else if (state == 3) {
+        return t('stateNoPower');
+      }
+    };
+
     // 设备状态分布图表
     if (statusChartRef.current) {
       const chart = echarts.init(statusChartRef.current);
@@ -147,14 +165,14 @@ const Dashboard = () => {
         },
         legend: {
           orient: 'vertical',
-          left: 'left',
+          left: 'right',
         },
         series: [
           {
             type: 'pie',
             radius: '60%',
             data: mockDeviceStats.deviceStatusDistribution.map((item) => ({
-              name: item.status,
+              name: state2Name(item.status),
               value: item.count,
               itemStyle: { color: item.color },
             })),
@@ -162,7 +180,7 @@ const Dashboard = () => {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)',
+                shadowColor: 'rgba(0, 0, 0, 1)',
               },
             },
           },
@@ -226,11 +244,11 @@ const Dashboard = () => {
           type: 'value',
         },
         legend: {
-          data: ['电量不足', '低电量', '正常', '良好'],
+          data: [t('stateNoPower'), t('stateLowBattery'), t('stateNormal'), t('stateFine')],
         },
         series: [
           {
-            name: '电量不足',
+            name: t('stateNoPower'),
             type: 'line',
             data: mockDeviceStats.batteryTrend.data.critical,
             itemStyle: { color: '#ff4d4f' },
@@ -238,7 +256,7 @@ const Dashboard = () => {
             smooth: true,
           },
           {
-            name: '低电量',
+            name: t('stateLowBattery'),
             type: 'line',
             data: mockDeviceStats.batteryTrend.data.warning,
             itemStyle: { color: '#faad14' },
@@ -246,7 +264,7 @@ const Dashboard = () => {
             smooth: true,
           },
           {
-            name: '正常',
+            name: t('stateNormal'),
             type: 'line',
             data: mockDeviceStats.batteryTrend.data.normal,
             itemStyle: { color: '#1890ff' },
@@ -254,7 +272,7 @@ const Dashboard = () => {
             smooth: true,
           },
           {
-            name: '良好',
+            name: t('stateFine'),
             type: 'line',
             data: mockDeviceStats.batteryTrend.data.good,
             itemStyle: { color: '#52c41a' },
@@ -284,41 +302,38 @@ const Dashboard = () => {
         }
       });
     };
-  }, []);
+  }, [t]);
 
   return (
     <div className={styles.container}>
       <div className={styles.dashboard}>
         <div className={styles.grid}>
-          <StatCard title="设备总数" value={mockDeviceStats.totalDevices} />
-          <StatCard title="在线设备" value={mockDeviceStats.onlineDevices} />
-          <StatCard title="告警设备" value={mockDeviceStats.alertDevices} />
-          <StatCard title="低电量设备" value={mockDeviceStats.lowBatteryDevices} />
+          <StatCard title={t('deviceCount')} value={mockDeviceStats.totalDevices} />
+          <StatCard title={t('deviceOnline')} value={mockDeviceStats.onlineDevices} />
+          <StatCard title={t('deviceOffline')} value={mockDeviceStats.offlineDevices} />
+          <StatCard title={t('deviceLowPower')} value={mockDeviceStats.lowBatteryDevices} />
         </div>
 
         <div className={styles.charts}>
           <div className={styles.card}>
-            <div className={styles.title}>设备状态分布</div>
+            <div className={styles.title}>{t('stateDeviceDistribution')}</div>
             <div ref={statusChartRef} className={styles.chart}></div>
           </div>
           <div className={styles.card}>
-            <div className={styles.title}>设备电量分布</div>
+            <div className={styles.title}>{t('devicePowerDistribution')}</div>
             <div ref={batteryChartRef} className={styles.chart}></div>
           </div>
-          {/* <div className={styles.card}>
-            <div className={styles.title}>耗电最快设备</div>
-            <ConsumptionList data={mockDeviceStats.batteryConsumption} />
-          </div> */}
+
           <div className={styles.card}>
-            <div className={styles.title}>耗电最快设备</div>
+            <div className={styles.title}>{t('devicePowerConsumption')}</div>
             <div className={styles.batteryLineChart}>
-              <ConsumptionTable data={mockDeviceStats.batteryConsumption} />
+              <ConsumptionTable data={mockDeviceStats.batteryConsumption} column={consumptionColumn} />
             </div>
           </div>
         </div>
 
         <div className={styles.trend}>
-          <div className={styles.title}>设备电量变动趋势</div>
+          <div className={styles.title}>{t('deviceChangeTrend')}</div>
           <div ref={trendChartRef} className={styles.chart}></div>
         </div>
       </div>
