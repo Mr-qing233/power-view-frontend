@@ -30,6 +30,8 @@ interface BatteryProps {
     sliceColorVariable?: string; // 分割线颜色CSS变量
     showPercentage?: boolean; // 是否显示百分比标签
     labelWidth?: number | string; // 标签宽度
+    labelColor?: string; // 标签颜色
+    labelColorVariable?: string; // 标签颜色CSS变量
   };
   className?: string; // 自定义类名
 }
@@ -68,6 +70,9 @@ const createBatteryChartOption = (value: number, style?: BatteryProps['style']) 
   // 从CSS变量获取分割线颜色，支持主题切换
   const sliceColor =
     style?.sliceColor || getCSSVariable(style?.sliceColorVariable || '--battery-slice-color', 'rgba(0,0,0,0.04)');
+
+  const labelColor =
+    style?.labelColor || getCSSVariable(style?.labelColorVariable || '--battery-label-color', 'rgba(0,0,0,0.04)');
 
   return {
     animation: true, // 启用动画效果
@@ -149,7 +154,7 @@ const createBatteryChartOption = (value: number, style?: BatteryProps['style']) 
         label: {
           show: style?.showPercentage || false, // 是否显示标签
           position: 'right', // 右侧显示
-          color: '#000', // 继承颜色
+          color: labelColor, // 继承颜色
           fontSize: 14, // 字体大小
           formatter: `${value}%`, // 格式化为百分比
           verticalAlign: 'top', // 垂直居中

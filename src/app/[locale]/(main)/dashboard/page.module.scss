@@ -68,48 +68,6 @@
         display: none; // Chrome, Safari, newer versions of Opera
       }
     }
-
-    // 排行榜样式
-    .list {
-      margin-top: 12px;
-      height: 200px;
-      overflow-y: auto;
-      // 隐藏滚动条但保持滚动功能
-      &::-webkit-scrollbar {
-        display: none; // Chrome, Safari, newer versions of Opera
-      }
-
-      .item {
-        display: flex;
-        align-items: center;
-        padding: 8px 0;
-        border-bottom: 1px solid var(--border-color);
-
-        &:last-child {
-          border-bottom: none;
-        }
-
-        .info {
-          flex: 1;
-
-          .name {
-            font-size: 14px;
-            color: var(--text-primary-color);
-            margin-bottom: 4px;
-          }
-          .detail {
-            font-size: 12px;
-            color: var(--text-secondary-color);
-          }
-        }
-
-        .consumption {
-          font-size: 14px;
-          color: #ff4d4f;
-          font-weight: 500;
-        }
-      }
-    }
   }
 
   // 底部趋势图表样式

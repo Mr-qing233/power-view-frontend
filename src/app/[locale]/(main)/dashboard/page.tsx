@@ -20,6 +20,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 import styles from './page.module.scss';
 
+import { getCSSVariable } from '@/lib/utils';
+
 /**
  * 模拟数据
  */
@@ -142,6 +144,7 @@ const Dashboard = () => {
   const t = useTranslations('Dashboard');
   // 耗电排行榜column
   const consumptionColumn = [t('deviceName'), t('deviceBattery'), t('deviceConsumption')];
+
   useEffect(() => {
     const state2Name = (state: number) => {
       if (state == 0) {
@@ -154,10 +157,12 @@ const Dashboard = () => {
         return t('stateNoPower');
       }
     };
-
+    const textPrimary = getCSSVariable('--text-primary-color', 'rgba(0,0,0,0.04)');
     // 设备状态分布图表
     if (statusChartRef.current) {
       const chart = echarts.init(statusChartRef.current);
+      // 从CSS变量字体颜色，支持主题切换
+
       chart.setOption({
         tooltip: {
           trigger: 'item',
@@ -166,6 +171,9 @@ const Dashboard = () => {
         legend: {
           orient: 'vertical',
           left: 'right',
+          textStyle: {
+            color: textPrimary, // 图例文字颜色
+          },
         },
         series: [
           {
@@ -180,8 +188,12 @@ const Dashboard = () => {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 1)',
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
               },
+            },
+            label: {
+              show: true,
+              color: textPrimary, // 文字颜色
             },
           },
         ],
@@ -245,6 +257,9 @@ const Dashboard = () => {
         },
         legend: {
           data: [t('stateNoPower'), t('stateLowBattery'), t('stateNormal'), t('stateFine')],
+          textStyle: {
+            color: textPrimary, // 图例文字颜色
+          },
         },
         series: [
           {
@@ -283,6 +298,32 @@ const Dashboard = () => {
       });
     }
 
+    // 添加主题变化监听
+    const observer = new MutationObserver(() => {
+      const newTextColor = getCSSVariable('--text-primary-color', 'rgba(0,0,0,0.85)');
+      echarts.init(statusChartRef.current).setOption({
+        legend: {
+          textStyle: { color: newTextColor },
+        },
+        series: [
+          {
+            label: { color: newTextColor },
+          },
+        ],
+      });
+
+      echarts.init(trendChartRef.current).setOption({
+        legend: {
+          textStyle: { color: newTextColor },
+        },
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-mode'],
+    });
+
     // 图表自适应和清理
     const handleResize = () => {
       [statusChartRef, batteryChartRef, trendChartRef, batteryLineChartRef].forEach((ref) => {
@@ -295,6 +336,7 @@ const Dashboard = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       [statusChartRef, batteryChartRef, trendChartRef, batteryLineChartRef].forEach((ref) => {
         if (ref.current) {
