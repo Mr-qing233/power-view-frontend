@@ -107,9 +107,11 @@ const StatCard = ({ title, value }: { title: string; value: number | string }) =
 const ConsumptionTable = ({ data, column }: { data: typeof mockDeviceStats.batteryConsumption; column: string[] }) => (
   <Table>
     <TableHeader>
-      <TableRow>
-        {column.map((item) => (
-          <TableHead key={item}>{item}</TableHead>
+      <TableRow className="max-w-fit ">
+        {column.map((item, index: number) => (
+          <TableHead key={index} className={index === 0 || 2 ? 'min-w-24 text-center' : 'text-center'}>
+            {item}
+          </TableHead>
         ))}
       </TableRow>
     </TableHeader>

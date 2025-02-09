@@ -14,5 +14,22 @@
     "getStarted": "立即开始",
     "login": "登录",
     "learnMore": "了解更多"
+  },
+  "Dashboard": {
+    "deviceCount": "设备数量",
+    "deviceOnline": "在线设备",
+    "deviceOffline": "离线设备",
+    "deviceLowPower": "低电量设备",
+    "stateDeviceDistribution": "设备状态分布",
+    "stateFine": "良好",
+    "stateNormal": "正常",
+    "stateLowBattery": "低电量",
+    "stateNoPower": "电量不足",
+    "devicePowerDistribution": "设备电量分布",
+    "devicePowerConsumption": "设备电量消耗",
+    "deviceChangeTrend": "设备变化趋势",
+    "deviceName": "名称",
+    "deviceBattery": "电量",
+    "deviceConsumption": "消耗"
   }
 }
