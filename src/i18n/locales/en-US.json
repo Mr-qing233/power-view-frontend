@@ -3,7 +3,8 @@
     "dashboard": "Dashboard",
     "test": "Test",
     "reports": "Reports",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "devices": "Devices"
   },
   "Common": {
     "login": "Login"

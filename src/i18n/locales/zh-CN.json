@@ -3,7 +3,8 @@
     "dashboard": "仪表盘",
     "test": "测试",
     "reports": "报告",
-    "disabled": "禁用"
+    "disabled": "禁用",
+    "devices": "设备"
   },
   "Common": {
     "login": "登录"

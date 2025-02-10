@@ -1,0 +1,96 @@
+.container {
+  padding: 24px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .titleSection {
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 16px;
+      color: var(--color-text-primary);
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--color-bg-base);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-bg-secondary);
+
+  .viewToggle {
+    display: flex;
+    gap: 8px;
+
+    button {
+      min-width: 100px;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  padding: 24px;
+
+  .cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+
+    .actions {
+      width: 100%;
+
+      button {
+        flex: 1;
+      }
+    }
+  }
+
+  .stats {
+    flex-wrap: wrap;
+  }
+
+  .content {
+    padding: 16px;
+
+    .cardGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

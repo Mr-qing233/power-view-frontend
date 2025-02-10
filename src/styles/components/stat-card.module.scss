@@ -1,0 +1,55 @@
+.card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  min-width: 120px;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .value {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .title {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+}
+
+// Types
+.default {
+  .value {
+    color: var(--color-primary);
+  }
+}
+
+.success {
+  .value {
+    color: var(--color-success, #52c41a);
+  }
+}
+
+.warning {
+  .value {
+    color: var(--color-warning, #faad14);
+  }
+}
+
+.error {
+  .value {
+    color: var(--color-error, #ff4d4f);
+  }
+}
+
+// Dark theme adjustments
+[data-theme='dark'] {
+  .card {
+    background: rgba(255, 255, 255, 0.04);
+  }
+}

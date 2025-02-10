@@ -15,6 +15,11 @@ const NavigationComponent = () => {
       // icon: '',
     },
     {
+      key: 'devices',
+      label: t('devices'),
+      // icon: '',
+    },
+    {
       key: 'test',
       label: t('test'),
       // icon: '',
