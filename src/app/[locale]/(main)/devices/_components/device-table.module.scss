@@ -1,53 +1,6 @@
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--color-bg-base);
+.container {
   border-radius: var(--border-radius);
-
-  th,
-  td {
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--color-bg-secondary);
-  }
-
-  th {
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-secondary);
-
-    &:first-child {
-      border-top-left-radius: var(--border-radius);
-    }
-
-    &:last-child {
-      border-top-right-radius: var(--border-radius);
-    }
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-
-    &:first-child {
-      border-bottom-left-radius: var(--border-radius);
-    }
-
-    &:last-child {
-      border-bottom-right-radius: var(--border-radius);
-    }
-  }
-
-  tr:hover {
-    background: var(--color-bg-secondary);
-  }
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-
-  button {
-    padding: 4px 8px;
-    font-size: 12px;
-  }
+  background-color: var(--components-bg-base);
+  padding: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }

@@ -11,23 +11,24 @@ $footer-heigh: 4rem;
   --text-color-black: #000000;
 
   --foreground: #000000;
-  --bg-base: #ffffff;
+  --components-bg-base: #ffffff;
+  --components-bg-secondary: #bdbdbd;
 
   --color-primary: #1890ff;
   --header-bg-color: #ffffff;
   --border-color: #f0f0f0;
 
-  --border-radius: 0.5rem;
+  --border-radius: 0.75rem;
 
   // layout
   --bg-color-lt: #f8faff;
   --bg-color-rb: #e0e7ff;
 
   --text-primary-color: #111827;
-  --text-secondary-color: : #4b5563;
+  --text-secondary-color: #4b5563;
 
   // HomePage
-  --card-bg-color: rgba(255, 255, 255, 0.8);
+  --card-bg-color: rgba(255, 255, 255, 1);
 
   --primary-button-bg-color: #4f46e5;
   --primary-button-hover-bg-color: #4338ca;
@@ -48,12 +49,19 @@ $footer-heigh: 4rem;
   // 默认渐变色
   --battery-color-start: #1890ff;
   --battery-color-end: #69c0ff;
+
+  // switch
+  --switch-bg-color: #bdbdbd;
+
+  // devices页
+  --devices-battery-slice-color: #ffffff;
 }
 
 @mixin dark-theme {
   --background: rgb(255, 255, 255);
   --foreground: #ffffff;
-  --bg-base: #3f4054;
+  --components-bg-base: #3f4054;
+  --components-bg-secondary: #bdbdbd;
 
   --header-bg-color: #3f4054;
   --border-color: '';
@@ -67,7 +75,7 @@ $footer-heigh: 4rem;
 
   // HomePage
 
-  --card-bg-color: rgba(31, 41, 55, 0.8);
+  --card-bg-color: rgba(31, 41, 55, 1);
 
   --secondary-button-bg-color: #374151;
   --secondary-button-color: #ffffff;
@@ -75,7 +83,6 @@ $footer-heigh: 4rem;
   --secondary-button-hover-bg-color: #4b5563;
 
   // dashboard
-  --battery-bg: rgba(255, 255, 255, 0.08);
   --battery-color-start: #177ddc;
   --battery-color-end: #3c9ae8;
 
@@ -83,7 +90,7 @@ $footer-heigh: 4rem;
   // card bg相同
 
   // 电池条背景色
-  --battery-bg: rgba(0, 202, 255, 0.2);
+  --battery-bg: rgba(0, 202, 255, 0.1);
   // 电池分割线颜色
   --battery-slice-color: #000000;
   --battery-label-color: #ffffff;
@@ -91,6 +98,12 @@ $footer-heigh: 4rem;
   // 默认渐变色
   --battery-color-start: #1890ff;
   --battery-color-end: #69c0ff;
+
+  // switch
+  --switch-bg-color: #bdbdbd;
+
+  // devices页
+  --devices-battery-slice-color: #3f4054;
 }
 
 // 使用scss变量创建css变量

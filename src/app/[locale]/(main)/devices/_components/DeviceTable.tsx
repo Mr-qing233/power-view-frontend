@@ -1,8 +1,22 @@
-import Battery from '@/components/Battery';
-import StatusTag from '@/components/StatusTag';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
+import {
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  PaginationState,
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table';
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+import { createColumns } from './columns';
 import styles from './device-table.module.scss';
+import { DeviceTableToolbar } from './DeviceTableToolbar';
 
 import { Device } from '@/interfaces/device';
 
@@ -14,67 +28,76 @@ interface DeviceTableProps {
 }
 
 const DeviceTable: React.FC<DeviceTableProps> = ({ devices, onViewDetails, onEditDevice, onDeleteDevice }) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const pagination = {
+    pageIndex,
+    pageSize,
+  };
+
+  const columns = createColumns({
+    onViewDetails,
+    onEditDevice,
+    onDeleteDevice,
+  });
+
+  const table = useReactTable({
+    data: devices,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onPaginationChange: setPagination,
+    state: {
+      sorting,
+      columnFilters,
+      pagination,
+    },
+  });
+
   return (
-    <div className="overflow-x-auto">
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>设备名称</th>
-            <th>状态</th>
-            <th>电量</th>
-            <th>类型</th>
-            <th>序列号</th>
-            <th>分组</th>
-            <th>最后更新</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          {devices.map((device) => (
-            <tr key={device.id}>
-              <td>{device.name}</td>
-              <td>
-                <StatusTag status={device.status} />
-              </td>
-              <td>
-                <Battery
-                  value={device.batteryLevel}
-                  style={{
-                    width: 120,
-                    height: 24,
-                    showPercentage: true,
-                  }}
-                />
-              </td>
-              <td>{device.type || '-'}</td>
-              <td>{device.serialNumber || '-'}</td>
-              <td>{device.group || '-'}</td>
-              <td>
-                {new Date(device.lastUpdated).toLocaleString('zh-CN', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-              </td>
-              <td>
-                <div className={styles.actions}>
-                  <Button variant="outline" size="sm" onClick={() => onViewDetails(device.id)}>
-                    详情
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => onEditDevice(device.id)}>
-                    编辑
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => onDeleteDevice(device.id)}>
-                    删除
-                  </Button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className={styles.container}>
+      <DeviceTableToolbar table={table} />
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  暂无数据
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

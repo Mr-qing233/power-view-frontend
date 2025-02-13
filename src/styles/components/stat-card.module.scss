@@ -1,5 +1,5 @@
 .card {
-  background: var(--color-bg-secondary);
+  background: var(--components-bg-base);
   border-radius: var(--border-radius);
   padding: 16px;
   min-width: 120px;
@@ -18,7 +18,7 @@
 
   .title {
     font-size: 14px;
-    color: var(--color-text-secondary);
+    color: var(--text-secondary-color);
   }
 }
 
@@ -50,6 +50,6 @@
 // Dark theme adjustments
 [data-theme='dark'] {
   .card {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--components-bg-base);
   }
 }

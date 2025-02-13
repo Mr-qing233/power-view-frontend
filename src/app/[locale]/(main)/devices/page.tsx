@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 
 import StatCard from '@/components/StatCard';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 
 import DeviceCard from './_components/DeviceCard';
 import DeviceTable from './_components/DeviceTable';
@@ -53,51 +55,60 @@ export default function DevicesPage() {
       <header className={styles.header}>
         <div className={styles.titleSection}>
           <h1>设备管理</h1>
-          <div className={styles.stats}>
-            <StatCard title="总设备" value={stats.totalDevices} />
-            <StatCard title="在线设备" value={stats.onlineDevices} type="success" />
-            <StatCard title="告警设备" value={stats.alertDevices} type="warning" />
-          </div>
         </div>
-        <div className={styles.actions}>
-          <Button>添加设备</Button>
-          <Button variant="outline">批量导入</Button>
-          <Button variant="outline">导出数据</Button>
+        <div className="flex-1" />
+        <div className={styles.stats}>
+          <StatCard title="总设备" value={stats.totalDevices} />
+          <StatCard title="在线设备" value={stats.onlineDevices} type="success" />
+          <StatCard title="告警设备" value={stats.alertDevices} type="warning" />
         </div>
       </header>
 
       <section className={styles.filters}>
         <div className={styles.viewToggle}>
-          <Button variant={viewMode === 'table' ? 'default' : 'outline'} onClick={() => setViewMode('table')}>
-            列表视图
-          </Button>
-          <Button variant={viewMode === 'card' ? 'default' : 'outline'} onClick={() => setViewMode('card')}>
-            卡片视图
-          </Button>
+          <div className={styles.actions}>
+            <Button>添加设备</Button>
+            <Button variant="outline">批量导入</Button>
+            <Button variant="outline">导出数据</Button>
+          </div>
+          <div className="flex-1" />
+          <div className="flex space-x-4 items-end ">
+            <Switch
+              id="airplane-mode"
+              checked={viewMode === 'card'}
+              onCheckedChange={() => (viewMode === 'table' ? setViewMode('card') : setViewMode('table'))}
+              className={styles.switch}
+            />
+            <Label htmlFor="airplane-mode" className="-translate-y-1">
+              切换视图
+            </Label>
+          </div>
         </div>
       </section>
 
       <section className={styles.content}>
-        {viewMode === 'table' ? (
-          <DeviceTable
-            devices={devices}
-            onViewDetails={handleViewDetails}
-            onEditDevice={handleEditDevice}
-            onDeleteDevice={handleDeleteDevice}
-          />
-        ) : (
-          <div className={styles.cardGrid}>
-            {devices.map((device) => (
-              <DeviceCard
-                key={device.id}
-                device={device}
-                onViewDetails={handleViewDetails}
-                onEditDevice={handleEditDevice}
-                onDeleteDevice={handleDeleteDevice}
-              />
-            ))}
-          </div>
-        )}
+        <div className={styles.deviceList}>
+          {viewMode === 'table' ? (
+            <DeviceTable
+              devices={devices}
+              onViewDetails={handleViewDetails}
+              onEditDevice={handleEditDevice}
+              onDeleteDevice={handleDeleteDevice}
+            />
+          ) : (
+            <div className={styles.cardGrid}>
+              {devices.map((device) => (
+                <DeviceCard
+                  key={device.id}
+                  device={device}
+                  onViewDetails={handleViewDetails}
+                  onEditDevice={handleEditDevice}
+                  onDeleteDevice={handleDeleteDevice}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

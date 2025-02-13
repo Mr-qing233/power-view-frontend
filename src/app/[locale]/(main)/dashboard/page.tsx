@@ -126,7 +126,7 @@ const ConsumptionTable = ({ data, column }: { data: typeof mockDeviceStats.batte
                 showPercentage: true,
                 height: 30,
                 labelWidth: 40,
-                sliceColorVariable: '--battery-slice-color',
+                sliceColorVariable: '--card-bg-color',
               }}
             />
           </TableCell>
