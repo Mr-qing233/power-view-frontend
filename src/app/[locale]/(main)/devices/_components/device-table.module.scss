@@ -1,6 +1,24 @@
+/**
+ * 设备表格组件样式
+ *
+ * 包含：
+ * - 表格容器样式
+ * - 表格阴影和圆角效果
+ * - 背景色和间距控制
+ *
+ * 使用变量：
+ * - --border-radius: 边框圆角
+ * - --components-bg-base: 组件背景色
+ */
+
+// === 表格容器 ===
 .container {
+  // 圆角效果
   border-radius: var(--border-radius);
+  // 背景色
   background-color: var(--components-bg-base);
+  // 内边距
   padding: 1rem;
+  // 阴影效果
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }

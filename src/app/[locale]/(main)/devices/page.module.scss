@@ -1,3 +1,14 @@
+/**
+ * 设备管理页面样式
+ *
+ * 布局结构：
+ * - container: 页面容器，垂直布局
+ * - header: 顶部区域，包含标题和统计信息
+ * - filters: 工具栏区域，包含操作按钮和搜索
+ * - content: 主内容区域，包含设备列表
+ */
+
+// === 页面容器 ===
 .container {
   min-height: 100%;
   display: flex;
@@ -7,12 +18,14 @@
   padding: 1rem 0;
 }
 
+// === 头部区域 ===
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 90vw;
 
+  // 标题部分
   .titleSection {
     h1 {
       font-size: 24px;
@@ -22,12 +35,14 @@
     }
   }
 
+  // 统计卡片区域
   .stats {
     display: flex;
     gap: 16px;
   }
 }
 
+// === 工具栏区域 ===
 .filters {
   display: flex;
   justify-content: center;
@@ -38,14 +53,19 @@
   border: 1px solid var(--color-bg-secondary);
   margin-top: 1rem;
 
+  // 工具栏内容
   .viewToggle {
     width: 90%;
     display: flex;
     gap: 8px;
+
+    // 操作按钮组
     .actions {
       display: flex;
       gap: 12px;
     }
+
+    // 视图切换开关
     .switch {
       background-color: var(--switch-bg-color);
 
@@ -56,6 +76,7 @@
   }
 }
 
+// === 主内容区域 ===
 .content {
   flex: 1;
   border-radius: var(--border-radius);
@@ -64,8 +85,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  // 设备列表容器
   .deviceList {
     width: 90%;
+
+    // 卡片网格布局
     .cardGrid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -74,16 +99,19 @@
   }
 }
 
-// 响应式设计
+// === 响应式设计 ===
 @media (max-width: 768px) {
+  // 移动端容器
   .container {
     padding: 16px;
   }
 
+  // 移动端头部
   .header {
     flex-direction: column;
     gap: 16px;
 
+    // 移动端操作按钮
     .actions {
       width: 100%;
 
@@ -93,13 +121,16 @@
     }
   }
 
+  // 移动端统计卡片
   .stats {
     flex-wrap: wrap;
   }
 
+  // 移动端主内容
   .content {
     padding: 16px;
 
+    // 移动端卡片网格
     .cardGrid {
       grid-template-columns: 1fr;
     }
