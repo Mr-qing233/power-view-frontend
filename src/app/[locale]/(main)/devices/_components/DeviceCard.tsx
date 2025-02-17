@@ -1,3 +1,8 @@
+/**
+ * 设备卡片组件
+ *
+ * 用于在卡片视图模式下展示单个设备的信息
+ */
 import Battery from '@/components/Battery';
 import StatusTag from '@/components/StatusTag';
 import { Button } from '@/components/ui/button';
@@ -19,36 +24,39 @@ const DeviceCard: React.FC<DeviceCardProps> = ({ device, onViewDetails, onEditDe
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h3 className={styles.name}>{name}</h3>
+        <h3 className={styles.name} title={name}>
+          {name}
+        </h3>
         <StatusTag status={status} />
       </div>
 
       <div className={styles.content}>
         <div className={styles.row}>
           <span className={styles.label}>电量</span>
-          <Battery
-            value={batteryLevel}
-            style={{
-              width: 120,
-              height: 24,
-              showPercentage: true,
-            }}
-          />
+          <div style={{ flex: 1 }}>
+            <Battery
+              value={batteryLevel}
+              style={{
+                width: '100%',
+                height: 24,
+              }}
+            />
+          </div>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>类型</span>
-          <span>{type || '-'}</span>
+          <span title={type || '-'}>{type || '-'}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>序列号</span>
-          <span>{serialNumber || '-'}</span>
+          <span title={serialNumber || '-'}>{serialNumber || '-'}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>分组</span>
-          <span>{group || '-'}</span>
+          <span title={group || '-'}>{group || '-'}</span>
         </div>
 
         <div className={styles.row}>

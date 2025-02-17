@@ -1,31 +1,25 @@
 /**
  * 设备管理页面样式
- *
- * 布局结构：
- * - container: 页面容器，垂直布局
- * - header: 顶部区域，包含标题和统计信息
- * - filters: 工具栏区域，包含操作按钮和搜索
- * - content: 主内容区域，包含设备列表
  */
 
-// === 页面容器 ===
 .container {
   min-height: 100%;
+
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
-// === 头部区域 ===
+// 页面头部样式
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 90vw;
 
-  // 标题部分
   .titleSection {
     h1 {
       font-size: 24px;
@@ -35,14 +29,13 @@
     }
   }
 
-  // 统计卡片区域
   .stats {
     display: flex;
-    gap: 16px;
+    gap: 1rem;
   }
 }
 
-// === 工具栏区域 ===
+// 工具栏样式
 .filters {
   display: flex;
   justify-content: center;
@@ -53,86 +46,60 @@
   border: 1px solid var(--color-bg-secondary);
   margin-top: 1rem;
 
-  // 工具栏内容
   .viewToggle {
     width: 90%;
     display: flex;
     gap: 8px;
+  }
 
-    // 操作按钮组
-    .actions {
-      display: flex;
-      gap: 12px;
-    }
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+  // 视图切换开关
+  .switch {
+    background-color: var(--switch-bg-color);
 
-    // 视图切换开关
-    .switch {
-      background-color: var(--switch-bg-color);
-
-      &[data-state='checked'] {
-        background-color: var(--color-primary);
-      }
+    &[data-state='checked'] {
+      background-color: var(--color-primary);
     }
   }
 }
 
-// === 主内容区域 ===
+// 内容区域样式
 .content {
   flex: 1;
   border-radius: var(--border-radius);
-  padding: 1rem 0;
+  padding: 2rem 0;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  // 设备列表容器
   .deviceList {
     width: 90%;
-
-    // 卡片网格布局
-    .cardGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
+    height: 100%;
   }
 }
 
-// === 响应式设计 ===
-@media (max-width: 768px) {
-  // 移动端容器
-  .container {
-    padding: 16px;
+// 卡片网格布局
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+
+  // 响应式布局
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  // 移动端头部
-  .header {
-    flex-direction: column;
-    gap: 16px;
-
-    // 移动端操作按钮
-    .actions {
-      width: 100%;
-
-      button {
-        flex: 1;
-      }
-    }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  // 移动端统计卡片
-  .stats {
-    flex-wrap: wrap;
-  }
-
-  // 移动端主内容
-  .content {
-    padding: 16px;
-
-    // 移动端卡片网格
-    .cardGrid {
-      grid-template-columns: 1fr;
-    }
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

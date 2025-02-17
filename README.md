@@ -1,22 +1,83 @@
-## Known Issues
+# Power View Frontend
 
-### Style System
+基于 Next.js 14 构建的设备监控管理系统前端项目。
 
-- Tailwind CSS 与 Ant Design 组件样式存在优先级冲突
-- 项目同时使用了 SCSS 和 Tailwind，需要更清晰的样式管理策略
+## 技术栈
 
-### Layout
+- **框架**: Next.js 14 (App Router)
+- **语言**: TypeScript
+- **样式**: TailwindCSS + SCSS Modules
+- **UI 组件**: shadcn/ui
+- **状态管理**: Zustand
+- **国际化**: next-intl
 
-- Header 和 Sider 组件的固定定位实现方式不统一
-- 布局组件之间的间距和层级关系需要优化
+## 项目结构
 
-### Configuration
+```
+src/
+├── app/                    # App Router 目录
+│   ├── [locale]/          # 多语言路由
+│   │   ├── (auth)/       # 认证相关页面
+│   │   └── (main)/       # 主应用页面
+├── components/            # 公共组件
+│   ├── ui/               # UI 基础组件
+│   └── ...               # 业务组件
+├── i18n/                 # 国际化配置
+├── interfaces/           # TypeScript 类型定义
+├── lib/                  # 工具函数
+├── middleware/          # 中间件
+├── sectors/             # 布局区块
+├── store/              # 状态管理
+└── styles/             # 全局样式
+```
 
-- Sass 使用了即将在 Dart Sass 3.0.0 中移除的 @import 语法
-- 需要更新到新的 @use 语法规范
+## 主要功能
 
-### Development Guidelines Needed
+### 设备管理
+- 支持表格/卡片两种视图模式
+- 统一的搜索过滤功能
+- 设备状态实时展示
+- 批量操作支持
 
-- 缺少统一的样式编写规范
-- 需要明确 Tailwind、SCSS 和 Ant Design 样式的使用边界
-- 组件样式命名规范待完善
+### 用户系统
+- 用户认证与授权
+- 个人信息管理
+- 权限控制
+
+### 系统配置
+- 多语言支持 (中文/英文)
+- 主题定制
+- 响应式布局
+
+## 开发说明
+
+1. 安装依赖
+```bash
+pnpm install
+```
+
+2. 启动开发服务器
+```bash
+pnpm dev
+```
+
+3. 构建生产版本
+```bash
+pnpm build
+```
+
+## 开发规范
+
+- 使用 TypeScript 进行类型检查
+- 遵循 ESLint 和 Prettier 配置
+- 组件使用 SCSS Modules 进行样式隔离
+- 提交前运行测试确保代码质量
+
+## 部署
+
+项目支持多种部署方式：
+- Vercel (推荐)
+- Docker
+- 静态文件托管
+
+详细部署文档请参考 `docs/deploy.md`
