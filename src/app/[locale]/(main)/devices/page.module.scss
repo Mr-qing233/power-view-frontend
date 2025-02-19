@@ -35,6 +35,19 @@
   }
 }
 
+.search {
+  position: relative;
+  width: 16rem;
+  border-radius: 0.5rem;
+  background-color: var(--components-bg-base);
+
+  .input {
+    padding-left: 2rem;
+    background-color: var(--components-bg-base);
+    border: 0px;
+  }
+}
+
 // 工具栏样式
 .filters {
   display: flex;

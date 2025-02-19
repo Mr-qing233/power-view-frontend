@@ -74,6 +74,7 @@ export const createColumns = ({
           style={{
             height: 24,
             showPercentage: true,
+            sliceColorVariable: '--devices-battery-slice-color',
           }}
         />
       </div>

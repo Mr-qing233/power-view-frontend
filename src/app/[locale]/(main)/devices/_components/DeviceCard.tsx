@@ -39,6 +39,8 @@ const DeviceCard: React.FC<DeviceCardProps> = ({ device, onViewDetails, onEditDe
               style={{
                 width: '100%',
                 height: 24,
+                sliceColorVariable: '--devices-battery-slice-color',
+                showPercentage: true,
               }}
             />
           </div>

@@ -39,7 +39,7 @@ export default function DevicesPage() {
       const mockStats = generateMockDeviceStats();
 
       // 模拟网络延迟
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // 随机模拟错误情况
       if (Math.random() < 0.1) {
@@ -118,13 +118,13 @@ export default function DevicesPage() {
           {/* 搜索和视图切换 */}
           <div className="flex items-center gap-6">
             {/* 搜索框 */}
-            <div className="relative w-64">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <div className={styles.search}>
+              <Search className="absolute  left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="按名称搜索..."
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="pl-8"
+                className={styles.input}
                 disabled={isLoading || !!error}
               />
             </div>

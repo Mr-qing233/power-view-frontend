@@ -60,7 +60,7 @@ $footer-heigh: 4rem;
 @mixin dark-theme {
   --background: rgb(255, 255, 255);
   --foreground: #ffffff;
-  --components-bg-base: #3f4054;
+  --components-bg-base: #3d425c;
   --components-bg-secondary: #bdbdbd;
 
   --header-bg-color: #3f4054;
@@ -103,7 +103,7 @@ $footer-heigh: 4rem;
   --switch-bg-color: #bdbdbd;
 
   // devices页
-  --devices-battery-slice-color: #3f4054;
+  --devices-battery-slice-color: var(--components-bg-base);
 }
 
 // 使用scss变量创建css变量
