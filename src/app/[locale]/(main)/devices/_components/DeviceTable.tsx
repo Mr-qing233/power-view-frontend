@@ -12,6 +12,7 @@
 import { useState } from 'react';
 
 import { flexRender, getCoreRowModel, getSortedRowModel, SortingState, useReactTable } from '@tanstack/react-table';
+import { useTranslations } from 'next-intl';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
@@ -34,12 +35,14 @@ interface DeviceTableProps {
 const DeviceTable: React.FC<DeviceTableProps> = ({ devices, onViewDetails, onEditDevice, onDeleteDevice }) => {
   // === 状态管理 ===
   const [sorting, setSorting] = useState<SortingState>([]);
+  const t = useTranslations('Devices');
 
   // 创建表格列配置
   const columns = createColumns({
     onViewDetails,
     onEditDevice,
     onDeleteDevice,
+    t,
   });
 
   // === 表格实例配置 ===
@@ -73,7 +76,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ devices, onViewDetails, onEdi
 
   return (
     <div className={styles.container}>
-      <div className="rounded-md border">
+      <div className="rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

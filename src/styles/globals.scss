@@ -54,6 +54,7 @@ $footer-heigh: 4rem;
   --switch-bg-color: #bdbdbd;
 
   // devices页
+  --devices-component-bg-color: #ffffff;
   --devices-battery-slice-color: #ffffff;
 }
 
@@ -104,6 +105,7 @@ $footer-heigh: 4rem;
 
   // devices页
   --devices-battery-slice-color: var(--components-bg-base);
+  --devices-component-bg-color: rgba(31, 41, 55, 1);
 }
 
 // 使用scss变量创建css变量

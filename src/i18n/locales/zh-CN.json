@@ -32,5 +32,29 @@
     "deviceName": "名称",
     "deviceBattery": "电量",
     "deviceConsumption": "消耗"
+  },
+  "Devices": {
+    "loadingError": "加载设备数据失败，请重试",
+    "unknownError": "未知错误，请重试",
+    "addDevice": "添加设备",
+    "batchImport": "批量导入",
+    "dataExport": "数据导出",
+    "searchPlaceholder": "搜索设备信息...",
+    "switchView": "切换视图",
+    "deviceName": "设备名称",
+    "deviceStatus": "设备状态",
+    "devicePower": "设备电量",
+    "deviceType": "设备类型",
+    "deviceNumber": "序列号",
+    "deviceGroup": "设备分组",
+    "lastUpdated": "最后更新",
+    "actions": "操作",
+    "details": "详情",
+    "edit": "编辑",
+    "delete": "删除",
+    "deviceConfig": "设备管理",
+    "deviceCount": "设备数量",
+    "deviceOnline": "在线设备",
+    "deviceLowPower": "低电量设备"
   }
 }

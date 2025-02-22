@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import StatCard from '@/components/StatCard';
 import { Button } from '@/components/ui/button';
@@ -27,6 +28,7 @@ export default function DevicesPage() {
   const [stats, setStats] = useState<DeviceStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations('Devices');
 
   // === 数据加载 ===
   const loadData = useCallback(async () => {
@@ -44,18 +46,18 @@ export default function DevicesPage() {
       // 随机模拟错误情况
       if (Math.random() < 0.1) {
         // 10% 概率触发错误
-        throw new Error('加载设备数据失败，请重试');
+        throw new Error(t('loadingError'));
       }
 
       setDevices(mockDevices);
       setStats(mockStats);
     } catch (error) {
       console.error('Failed to load devices:', error);
-      setError(error instanceof Error ? error.message : '未知错误');
+      setError(error instanceof Error ? error.message : t('unknownError'));
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [t]);
 
   // 首次加载数据
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function DevicesPage() {
       {/* 页面头部：标题和统计信息 */}
       <header className={styles.header}>
         <div className={styles.titleSection}>
-          <h1>设备管理</h1>
+          <h1>{t('deviceConfig')}</h1>
         </div>
         <div className="flex-1" />
         <div className={styles.stats}>
@@ -94,12 +96,12 @@ export default function DevicesPage() {
               <div key={i} className="h-24 w-48 animate-pulse rounded-lg bg-muted" />
             ))
           ) : error ? (
-            <div className="text-red-500">加载统计信息失败</div>
+            <div className="text-red-500">{t('loadingError')}</div>
           ) : (
             <>
-              <StatCard title="总设备" value={stats?.totalDevices ?? 0} />
-              <StatCard title="在线设备" value={stats?.onlineDevices ?? 0} type="success" />
-              <StatCard title="告警设备" value={stats?.alertDevices ?? 0} type="warning" />
+              <StatCard title={t('deviceCount')} value={stats?.totalDevices ?? 0} />
+              <StatCard title={t('deviceOnline')} value={stats?.onlineDevices ?? 0} type="success" />
+              <StatCard title={t('deviceLowPower')} value={stats?.alertDevices ?? 0} type="warning" />
             </>
           )}
         </div>
@@ -110,9 +112,9 @@ export default function DevicesPage() {
         <div className={styles.viewToggle}>
           {/* 批量操作按钮组 */}
           <div className={styles.actions}>
-            <Button>添加设备</Button>
-            <Button variant="outline">批量导入</Button>
-            <Button variant="outline">导出数据</Button>
+            <Button>{t('addDevice')}</Button>
+            <Button variant="outline">{t('batchImport')}</Button>
+            <Button variant="outline">{t('dataExport')}</Button>
           </div>
           <div className="flex-1" />
           {/* 搜索和视图切换 */}
@@ -121,7 +123,7 @@ export default function DevicesPage() {
             <div className={styles.search}>
               <Search className="absolute  left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="按名称搜索..."
+                placeholder={t('searchPlaceholder')}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 className={styles.input}
@@ -137,7 +139,7 @@ export default function DevicesPage() {
                 className={styles.switch}
                 disabled={isLoading || !!error}
               />
-              <Label htmlFor="view-mode">切换视图</Label>
+              <Label htmlFor="view-mode">{t('switchView')}</Label>
             </div>
           </div>
         </div>

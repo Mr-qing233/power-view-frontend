@@ -32,5 +32,29 @@
     "deviceName": "Name",
     "deviceBattery": "Battery",
     "deviceConsumption": "Consumption"
+  },
+  "Devices": {
+    "loadingError": "Failed to load device data, please try again",
+    "unknownError": "Unknown error, please try again",
+    "addDevice": "Add Device",
+    "batchImport": "Batch Import",
+    "dataExport": "Data Export",
+    "searchPlaceholder": "Search device information...",
+    "switchView": "Switch View",
+    "deviceName": "Name",
+    "deviceStatus": "Status",
+    "devicePower": "Power",
+    "deviceType": "Type",
+    "deviceNumber": "Serial Number",
+    "deviceGroup": "Group",
+    "lastUpdated": "Last Updated",
+    "actions": "Actions",
+    "details": "Details",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deviceConfig": "Device Management",
+    "deviceCount": "Device Count",
+    "deviceOnline": "Device Online",
+    "deviceLowPower": "Device Low Power"
   }
 }
